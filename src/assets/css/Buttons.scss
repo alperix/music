@@ -1,0 +1,61 @@
+.burger {
+    padding: 0.3rem 0.6rem 0rem 0.6rem;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: #fff;
+    pointer-events: none;
+    cursor: default;
+    font-size: 1.5rem;
+
+    &:hover {
+        background-color: #eee;
+        border: 2px solid #aaa;
+    }
+
+    @media only screen and (max-width: 640px) {
+        cursor: pointer;
+        pointer-events: all;
+    }
+}
+
+.blue-button {
+    padding: 0.6rem;
+    border-radius: 8px;
+    background-color: #55AAFF;
+    color: white;
+
+    &:hover:enabled {
+        background-color: #77CCFF;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+    }
+}
+
+.info-button {
+    padding: 0 0.6rem;
+    border: 2px solid;
+    border-color: #9eb29d;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    pointer-events: all;
+    font-family: "code-medium";
+    font-size: 1rem;
+    color: #476343;
+
+    &.on {
+        background-color: #c9ffb7;
+    }
+
+    &.off {
+        background-color: #fff;
+    }
+
+    &:hover {
+        background-color: #e4fde2;
+        border-color: #94b092;
+    }
+}
+

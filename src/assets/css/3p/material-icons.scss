@@ -1,0 +1,13 @@
+@import "material-icons/iconfont/material-icons.css";
+
+$material-icons-font-path: "./" !default;
+$material-icons-font-size: 24px !default;
+$material-icons-font-display: block !default;
+
+.material-icons,
+.material-icons-outlined {
+    svg {
+        fill: transparent;
+        stroke: inherit;
+    }
+}

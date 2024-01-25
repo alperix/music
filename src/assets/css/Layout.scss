@@ -1,0 +1,122 @@
+html,
+body,
+main {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    overflow: hidden;
+    position: relative;
+}
+
+.header {
+    z-index: 100;
+    height: 64px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: #eef;
+    border-color: #aaa;
+    border-bottom-width: 2px;
+    box-shadow: -1px 10px 15px -2px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    z-index: 100;
+    height: 36px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eef;
+    border-color: #aaa;
+    border-top-width: 1px;
+}
+
+.content {
+    z-index: 0;
+    margin-top: 64px;
+    margin-bottom: 32px;
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 100px);
+
+    .left {
+        padding: 1rem 0;
+        background-color: #eee;
+
+        @media only screen and (max-width: 640px) {
+            display: none;
+        }
+    }
+
+    .page {
+        flex: 1;
+        width: 100%;
+        padding: 1.2rem;
+        background-color: #fff;
+        overflow-y: auto;
+        position: relative;
+    }
+}
+
+.menu {
+    z-index: 100;
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    //max-width: 300px;
+    border-color: #ddd;
+    border-width: 0px 2px 0px 2px;
+    box-shadow: -1px 10px 15px -2px rgba(0, 0, 0, 0.3);
+
+    &.open {
+        display: block;
+
+        @media only screen and (min-width: 640px) {
+            display: none;
+        }
+    }
+}
+
+.menu-link {
+    padding: 0.4rem 1rem;
+    width: 100%;
+    border-color: #ddd;
+    border-bottom-width: 2px;
+
+    &:hover {
+        background-color: #ccc;
+    }
+
+    @media only screen and (max-width: 640px) {
+        padding: 0.9rem;
+    }
+}
+
+.centered-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .content-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        max-width: 1000px;
+    }   
+}

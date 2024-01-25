@@ -1,0 +1,132 @@
+// General
+@font-face {
+    font-family: 'font-light';
+    src: url('assets/fonts/NotoSans-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ @font-face {
+    font-family: 'font-light-italic';
+    src: url('assets/fonts/NotoSans-LightItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+@font-face {
+    font-family: 'font-regular';
+    src: url('assets/fonts/NotoSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ @font-face {
+    font-family: 'font-italic';
+    src: url('assets/fonts/NotoSans-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ @font-face {
+    font-family: 'font-medium';
+    src: url('assets/fonts/NotoSans-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ @font-face {
+    font-family: 'font-medium-italic';
+    src: url('assets/fonts/NotoSans-MediumItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ .f300 {
+    font-family: 'font-light';
+    font-weight: normal;
+    font-style: normal;
+ }
+ 
+ .f300i {
+    font-family: 'font-light-italic';
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ .f400 {
+    font-family: 'font-regular';
+    font-weight: normal;
+    font-style: normal;
+ }
+ 
+ .f400i, em, i {
+    font-family: 'font-italic';
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ .f500, strong, b {
+    font-family: 'font-medium';
+    font-weight: normal;
+    font-style: normal;
+ }
+ 
+ .f500i {
+    font-family: 'font-medium-italic';
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ // CODE
+ @font-face {
+    font-family: 'code-regular';
+    src: url('assets/fonts/FiraMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+ }
+
+ @font-face {
+    font-family: 'code-medium';
+    src: url('assets/fonts/FiraMono-Medium.ttf') format('truetype');
+    font-weight: normal;
+ }
+
+ @font-face {
+    font-family: 'code-bold';
+    src: url('assets/fonts/FiraMono-Bold.ttf') format('truetype');
+    font-weight: normal;
+ }
+
+ .cf400 {
+    font-family: 'code-regular';
+    font-weight: normal;
+ }
+
+ .cf500 {
+    font-family: 'code-medium';
+    font-weight: normal;
+ }
+ 
+ .cf700 {
+    font-family: 'code-bold';
+    font-weight: normal;
+ }
+
+ html, body {
+    font-family: 'font-regular';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: 'code-regular';
+
+    strong, b {
+        font-family: 'code-bold';
+        font-weight: normal;
+    }
+
+    em, i {
+        font-family: 'code-regular';
+        font-style: italic;
+    }
+}
