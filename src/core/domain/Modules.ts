@@ -1,10 +1,10 @@
-type module = 
+export type route = 
 {
     name: string;
     path: string;
 }
 
-export const modules : Record<string, module> = {
+export const modules : Record<string, route> = {
     administration: { name: "Administration", path: "/administration" },
     registration: { name: "Anmeldung", path: "/registration" },
     freePlaces: { name: "Freie Plätze", path: "/free-places" },

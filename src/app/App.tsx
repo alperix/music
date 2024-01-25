@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { route } from "../core/domain/Modules";
 import { de } from "../core/resources/de";
 import { Icon } from "../atoms/Icon";
 import { Routes, Links } from "./Routes";
 
+
 export const App = () => {
     const [open, setOpen] = useState(false);
+    const [module, setModule] = useState("");
 
     return (
         <main>
             {/* HEADER */}
             <header className="header">
-                <div className="flex items-center justify-start gap-3">
+                <div className="left-container">
                     <button className="burger" onClick={() => setOpen(!open)}>
                         <Icon icon="music_note" />
                     </button>
-                    <Link to="/" onClick={() => setOpen(false)}>
-                        <h1 className="f500">{de.title}</h1>
-                    </Link>
+                    <div className="links">
+                        <Link to="/" onClick={() => setOpen(false)}>
+                            <div className={`f500 text-2xl`}>{de.title}</div>
+                        </Link>
+                        {module && <div className="module">{module}</div>}
+                    </div>
                 </div>
             </header>
 
@@ -27,13 +33,13 @@ export const App = () => {
                 className={`menu ${open ? "open" : ""}`}
                 onClick={() => setOpen(false)}
             >
-                <Links />
+                <Links onClick={(r: route) => setModule(r.name)}/>
             </nav>
 
             {/* CONTENT */}
             <div className="content">
                 <div className="left">
-                    <Links />
+                    <Links onClick={(r: route) => setModule(r.name)}/>
                 </div>
                 <div className="page" onClick={() => setOpen(false)}>
                     <Routes />
@@ -42,9 +48,9 @@ export const App = () => {
 
             {/* FOOTER */}
             <div className="footer">
-                <p className="text-xs font-bold text-black text-opacity-25">
+                <span>
                     &copy;2023, {de.title} Version: 0.0.0.0
-                </p>
+                </span>
             </div>
         </main>
     );

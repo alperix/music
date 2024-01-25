@@ -27,6 +27,26 @@ main {
     border-color: #aaa;
     border-bottom-width: 2px;
     box-shadow: -1px 10px 15px -2px rgba(0, 0, 0, 0.1);
+
+    .left-container {
+        display: flex;
+        align-items : center;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+
+            .module {
+                font-size: 0.9rem;
+                //font-family: 'font-italic';
+                opacity: 0.65;
+                text-transform: uppercase;
+            }
+        }
+    }
 }
 
 .footer {
@@ -42,6 +62,11 @@ main {
     background-color: #eef;
     border-color: #aaa;
     border-top-width: 1px;
+
+    span {
+        font-size: 0.7rem;
+        opacity: 0.45;
+    }
 }
 
 .content {

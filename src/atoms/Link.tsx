@@ -1,16 +1,17 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
+import { route } from "../core/domain/Modules";
+
 type LinkProps = {
-    to: string;
-    text: string;
-    onClick?: () => void;
+    route : route
+    onClick?: (r: route) => void;
 };
 
-export const Link: React.FC<LinkProps> = ({ to, text, onClick }) => {
+export const Link: React.FC<LinkProps> = ({ route, onClick }) => {
     return (
-        <RouterLink to={to} onClick={onClick}>
-            <div className={`menu-link`}>{text}</div>
+        <RouterLink to={route.path} onClick={() => onClick && onClick(route)}>
+            <div className={`menu-link`}>{route.name}</div>
         </RouterLink>
     );
 };
