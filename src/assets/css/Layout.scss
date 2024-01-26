@@ -14,7 +14,7 @@ main {
 
 .header {
     z-index: 100;
-    height: 64px;
+    height: 70px;
     position: absolute;
     width: 100%;
     top: 0;
@@ -28,9 +28,9 @@ main {
     border-bottom-width: 2px;
     box-shadow: -1px 10px 15px -2px rgba(0, 0, 0, 0.1);
 
-    .left-container {
+    .app-title {
         display: flex;
-        align-items : center;
+        align-items: center;
         justify-content: flex-start;
         gap: 1rem;
 
@@ -39,7 +39,7 @@ main {
             flex-direction: column;
             line-height: 1.2;
 
-            .module {
+            .module-name {
                 font-size: 0.9rem;
                 //font-family: 'font-italic';
                 opacity: 0.65;
@@ -51,7 +51,7 @@ main {
 
 .footer {
     z-index: 100;
-    height: 36px;
+    height: 30px;
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -71,65 +71,27 @@ main {
 
 .content {
     z-index: 0;
-    margin-top: 64px;
-    margin-bottom: 32px;
+    margin-top: 70px;
+    margin-bottom: 36px;
     display: flex;
     width: 100%;
     height: calc(100vh - 100px);
 
-    .left {
-        padding: 1rem 0;
-        background-color: #eee;
-
-        @media only screen and (max-width: 640px) {
-            display: none;
-        }
-    }
-
-    .page {
+    .app-content {
         flex: 1;
         width: 100%;
-        padding: 1.2rem;
         background-color: #fff;
-        overflow-y: auto;
         position: relative;
-    }
-}
 
-.menu {
-    z-index: 100;
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    //max-width: 300px;
-    border-color: #ddd;
-    border-width: 0px 2px 0px 2px;
-    box-shadow: -1px 10px 15px -2px rgba(0, 0, 0, 0.3);
-
-    &.open {
-        display: block;
-
-        @media only screen and (min-width: 640px) {
-            display: none;
+        .module-content {
+            
+            .routes {
+                margin-top: 50px;
+                padding: 1.2rem;
+                height: calc(100vh - 150px);
+                overflow-y: auto;
+            }
         }
-    }
-}
-
-.menu-link {
-    padding: 0.4rem 1rem;
-    width: 100%;
-    border-color: #ddd;
-    border-bottom-width: 2px;
-
-    &:hover {
-        background-color: #ccc;
-    }
-
-    @media only screen and (max-width: 640px) {
-        padding: 0.9rem;
     }
 }
 
@@ -143,5 +105,5 @@ main {
         display: flex;
         flex-direction: column;
         max-width: 1600px;
-    }   
+    }
 }

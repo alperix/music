@@ -1,28 +1,30 @@
 import React from "react";
-import { Route, Routes as RoutesContainer } from "react-router-dom";
+import { Route, Routes  } from "react-router-dom";
 
-import { Empty } from "../atoms/Empty";
-import { modules, route } from "../core/domain/Modules";
+import { appRoutes, route } from "../core/domain/Modules";
 import { Link } from "../atoms/Link";
 
-export const Routes = () => (
-    <RoutesContainer>
-        <Route index element={<Empty />} />
-        {Object.keys(modules).map((key: string) => (
+import { ModuleView } from "../modules/ModuleView";
+import { NotImplemented } from "../atoms/NotImplemented";
+
+export const AppRoutes = () => (
+    <Routes>
+        <Route index element={<NotImplemented title="Home" />} />
+        {Object.keys(appRoutes).map((module: string) => (
             <Route
-                key={key}
-                path={modules[key].path}
-                element={<Empty />}
+                key={module}
+                path={`${appRoutes[module].path}/*`}
+                element={<ModuleView module={module} />}
             />
         ))}
-    </RoutesContainer>
+    </Routes>
 );
 
-export const Links = ({ onClick }: { onClick?: (r: route) => void }) =>
-    Object.keys(modules).map((key: string) => (
+export const AppLinks = ({ onClick }: { onClick?: (r: route) => void }) =>
+    Object.keys(appRoutes).map((module: string) => (
         <Link
-            key={key}
-            route={modules[key]}
-            onClick={() => onClick && onClick(modules[key])}
+            key={module}
+            route={appRoutes[module]}
+            onClick={() => onClick && onClick(appRoutes[module])}
         />
     ));

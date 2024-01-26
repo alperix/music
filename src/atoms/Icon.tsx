@@ -4,6 +4,7 @@ type IconTypes = "outlined" | "round" | "sharp" | "two-tone";
 
 type IconProps = PropsWithChildren & {
     icon?: string;
+    alt?: string;
     typ?: IconTypes;
     block?: boolean;
     error?: boolean;
@@ -19,6 +20,7 @@ type IconProps = PropsWithChildren & {
 
 export const Icon: React.FC<IconProps> = ({
     icon,
+    alt = "",
     typ = "",
     block,
     clsn,
@@ -37,11 +39,11 @@ export const Icon: React.FC<IconProps> = ({
         fontWeight: bold ? "bold" : "normal",
         fontSize: size ? `${size}rem` : "inherit",
         color: error ? "#b91c1c" : success ? "#15803d" : "inherit",
-        opacity: muted ? 0.5 : "inherit",
+        opacity: muted ? 0.4 : "inherit",
     };
 
     const mi = (
-        <span className={css} style={style}>
+        <span className={css} style={style} title={alt}>
             {icon ?? children}
         </span>
     );

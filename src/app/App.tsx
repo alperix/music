@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { route } from "../core/domain/Modules";
 import { de } from "../core/resources/de";
 import { Icon } from "../atoms/Icon";
-import { Routes, Links } from "./Routes";
+import { AppRoutes, AppLinks } from "./Routes";
 
 
 export const App = () => {
@@ -15,7 +15,7 @@ export const App = () => {
         <main>
             {/* HEADER */}
             <header className="header">
-                <div className="left-container">
+                <div className="app-title">
                     <button className="burger" onClick={() => setOpen(!open)}>
                         <Icon icon="music_note" />
                     </button>
@@ -23,26 +23,26 @@ export const App = () => {
                         <Link to="/" onClick={() => setOpen(false)}>
                             <div className={`f500 text-2xl`}>{de.title}</div>
                         </Link>
-                        {module && <div className="module">{module}</div>}
+                        {module && <div className="module-name">{module}</div>}
                     </div>
                 </div>
             </header>
 
             {/* BURGER-MENU */}
             <nav
-                className={`menu ${open ? "open" : ""}`}
+                className={`burger-nav ${open ? "open" : ""}`}
                 onClick={() => setOpen(false)}
             >
-                <Links onClick={(r: route) => setModule(r.name)}/>
+                <AppLinks onClick={(r: route) => setModule(r.name)}/>
             </nav>
 
             {/* CONTENT */}
             <div className="content">
-                <div className="left">
-                    <Links onClick={(r: route) => setModule(r.name)}/>
-                </div>
-                <div className="page" onClick={() => setOpen(false)}>
-                    <Routes />
+                <nav className="left-nav">
+                    <AppLinks onClick={(r: route) => setModule(r.name)}/>
+                </nav>
+                <div className="app-content" onClick={() => setOpen(false)}>
+                    <AppRoutes />
                 </div>
             </div>
 
