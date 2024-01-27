@@ -7,14 +7,15 @@ type IconProps = PropsWithChildren & {
     alt?: string;
     typ?: IconTypes;
     block?: boolean;
+
     error?: boolean;
     success?: boolean;
 
     bold?: boolean;
     italic?: boolean;
     muted?: boolean;
-
     size?: number;
+    
     clsn?: string;
 };
 
