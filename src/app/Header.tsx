@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { de } from "../core/resources/de";
-import { useCatchEvent } from "../core/hooks/CustomEvents";
+import { useCatchEvent } from "../core/services/CustomEvents";
 import { modules } from "../core/domain/Routes";
 import { Icon } from "../atoms/Icon";
 

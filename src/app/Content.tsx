@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AppRoutes, AppLinks } from "./AppRoutes";
-import { emitEvent } from "../core/hooks/CustomEvents";
+import { emitEvent } from "../core/services/CustomEvents";
 
 export const Content = () => (
     <section

@@ -55,31 +55,37 @@ export const moduleFeatures: Record<string, string[]> = {
 };
 
 export type module = keyof typeof modules;
-export type ModuleProp = { module: module }
+export type ModuleProp = { module: module };
 export type feature = keyof typeof features;
-export type FeatureProp = { feature: feature }
+export type FeatureProp = { feature: feature };
 
 export type route = {
     name: string;
     path: string;
+    module: module;
+    feature: feature;
     icon?: string;
 };
 
-export const appRoutes: Record<string, route> = Object.keys(modules).reduce(
-    (routes, key) => ({
+export const moduleRoutes: Record<module, route> = Object.keys(modules).reduce(
+    (routes, m) => ({
         ...routes,
-        [key]: { name: modules[key], path: `/${key}` }
+        [m]: { name: modules[m], path: `/${m}`, module: m, feature: "" }
     }),
     {}
 );
 
-export const moduleRoutes: Record<string, route[]> = Object.keys(modules).reduce(
-    (routes, key) => ({
+export const featureRoutes: Record<module, route[]> = Object.keys(
+    modules
+).reduce(
+    (routes, m) => ({
         ...routes,
-        [key]: moduleFeatures[key].map(f => ({
+        [m]: moduleFeatures[m].map((f) => ({
             name: features[f],
             path: `/${f}`,
-            icon: featureIcons[f]
+            icon: featureIcons[f],
+            module: m,
+            feature: f
         }))
     }),
     {}

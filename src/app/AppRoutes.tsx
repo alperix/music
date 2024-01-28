@@ -1,34 +1,43 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { appRoutes, module } from "../core/domain/Routes";
+import { moduleRoutes, module, route } from "../core/domain/Routes";
 import { Link } from "../atoms/Link";
 
 import { ModuleView } from "../modules/ModuleView";
-import { NotImplemented } from "../atoms/NotImplemented";
-import { useCatchEvent } from "../core/hooks/CustomEvents";
+import { useCatchEvent } from "../core/services/CustomEvents";
 
-export const AppRoute = (m: module) => (
+const moduleKeys = Object.keys(moduleRoutes);
+const moduleRoute = (m: module) => moduleRoutes[m];
+
+export const Index = () => (
+    <Route index element={<ModuleView module={moduleKeys[0]} />} />
+);
+
+export const AppRoute = (r: route) => (
     <Route
-        key={m}
-        path={`${appRoutes[m].path}/*`}
-        element={<ModuleView module={m} />}
+        index
+        key={r.module}
+        path={`${r.path}/*`}
+        element={<ModuleView module={r.module} />}
     />
 );
 
-export const AppRoutes = () => (
-    <Routes>
-        <Route index element={<NotImplemented title="Home" />} />
-        {Object.keys(appRoutes).map(AppRoute)}
-    </Routes>
-);
+export const AppRoutes = () => {
+    return (
+        <Routes>
+            {Index()}
+            {moduleKeys.map((m) => AppRoute(moduleRoute(m)))}
+        </Routes>
+    );
+};
 
 export const AppLinks = () => {
     const [selected, setSelected] = useState<module | null>(null);
 
     useCatchEvent("module-changed", setSelected);
 
-    return Object.keys(appRoutes).map((m) => (
-        <Link key={m} route={appRoutes[m]} selected={selected == m} />
+    return moduleKeys.map((m) => (
+        <Link key={m} route={moduleRoute(m)} selected={selected == m} />
     ));
 };

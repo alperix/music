@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ModuleContent } from "./ModuleContent";
 import { ModuleLinks, ModuleRoutes } from "./ModuleRoutes";
 
-import { emitEvent } from "../core/hooks/CustomEvents";
+import { emitEvent } from "../core/services/CustomEvents";
 import { ModuleProp } from "../core/domain/Routes";
 
 export const ModuleView = ({ module }: ModuleProp) => {
@@ -13,9 +13,9 @@ export const ModuleView = ({ module }: ModuleProp) => {
             <nav className="module-nav">
                 <ModuleLinks module={module} />
             </nav>
-            <div className="routes">
+            <section className="page">
                 <ModuleRoutes module={module} />
-            </div>
+            </section>
         </ModuleContent>
     );
 };

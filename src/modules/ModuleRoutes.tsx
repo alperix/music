@@ -1,36 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { moduleRoutes, ModuleProp, route } from "../core/domain/Routes";
-import { Link } from "../atoms/Link";
-import { NotImplemented } from "../atoms/NotImplemented";
+import {
+    featureRoutes,
+    ModuleProp,
+    route,
+    module,
+    feature
+} from "../core/domain/Routes";
 
-export const ModuleRoot = (r: route) => (
+import { Link } from "../atoms/Link";
+import { FeatureView } from "../pages/FeatureView";
+import { useCatchEvent } from "../core/services/CustomEvents";
+
+const routes = (m: module) => featureRoutes[m];
+
+export const Index = (m: module) => (
+    <Route index element={<FeatureView feature={routes(m)[0].feature} />} />
+);
+
+export const ModuleRoute = (fr: route) => (
     <Route
-        key={r.name}
-        path={r.path}
-        element={<NotImplemented title={r.name} />}
+        key={fr.name}
+        path={fr.path}
+        element={<FeatureView feature={fr.feature} />}
     />
 );
 
-export const ModuleRoutes = ({ module }: ModuleProp) => {
-    const routes = moduleRoutes[module];
+export const ModuleRoutes = ({ module }: ModuleProp) => (
+    <Routes>
+        {Index(module)}
+        {routes(module).map((fr) => ModuleRoute(fr))}
+    </Routes>
+);
 
-    return (
-        <Routes>
-            <Route index element={<NotImplemented title={routes[0].name} />} />
-            {routes.map(ModuleRoot)}
-        </Routes>
-    );
-};
+export const ModuleLinks = ({ module }: ModuleProp) => {
+    const [selected, setSelected] = useState<feature | null>(null);
 
-export const ModuleLinks = ({ module }: ModuleProp) =>
-    moduleRoutes[module].map((r) => (
+    useCatchEvent("feature-changed", setSelected);
+
+    return routes(module).map((fr) => (
         <Link
-            key={r.name}
+            key={fr.name}
             route={{
-                ...r,
-                path: `/${module}${r.path}`
+                ...fr,
+                path: `/${module}${fr.path}`
             }}
+            selected={selected == fr.feature}
         />
     ));
+};
