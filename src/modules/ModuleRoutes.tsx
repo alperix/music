@@ -9,7 +9,7 @@ import {
     feature
 } from "../core/domain/Routes";
 
-import { Link } from "../atoms/Link";
+import { RouterLink } from "../atoms/RouterLink";
 import { FeatureView } from "../pages/FeatureView";
 import { useCatchEvent } from "../core/services/CustomEvents";
 
@@ -40,7 +40,7 @@ export const ModuleLinks = ({ module }: ModuleProp) => {
     useCatchEvent("feature-changed", setSelected);
 
     return routes(module).map((fr) => (
-        <Link
+        <RouterLink
             key={fr.name}
             route={{
                 ...fr,

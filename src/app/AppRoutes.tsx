@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { moduleRoutes, module, route } from "../core/domain/Routes";
-import { Link } from "../atoms/Link";
+import { RouterLink } from "../atoms/RouterLink";
 
 import { ModuleView } from "../modules/ModuleView";
 import { useCatchEvent } from "../core/services/CustomEvents";
@@ -38,6 +38,6 @@ export const AppLinks = () => {
     useCatchEvent("module-changed", setSelected);
 
     return moduleKeys.map((m) => (
-        <Link key={m} route={moduleRoute(m)} selected={selected == m} />
+        <RouterLink key={m} route={moduleRoute(m)} selected={selected == m} />
     ));
 };

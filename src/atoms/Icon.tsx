@@ -6,17 +6,14 @@ type IconProps = PropsWithChildren & {
     icon?: string;
     alt?: string;
     typ?: IconTypes;
-    block?: boolean;
+    size?: number;
+    cls?: string;
 
+    block?: boolean;
     error?: boolean;
     success?: boolean;
-
     bold?: boolean;
-    italic?: boolean;
     muted?: boolean;
-    size?: number;
-    
-    clsn?: string;
 };
 
 export const Icon: React.FC<IconProps> = ({
@@ -24,19 +21,17 @@ export const Icon: React.FC<IconProps> = ({
     alt = "",
     typ = "",
     block,
-    clsn,
+    cls,
     size,
     bold,
-    italic,
     muted,
     error,
     success,
     children
 }) => {
-    const css = `material-icons${typ ? `-${typ}` : ""} ${clsn ? clsn : ""}`;
+    const css = `material-icons${typ ? `-${typ}` : ""} ${cls ? cls : ""}`;
 
     const style = {
-        fontStyle: italic ? "italic" : "inherit",
         fontWeight: bold ? "bold" : "normal",
         fontSize: size ? `${size}rem` : "inherit",
         color: error ? "#b91c1c" : success ? "#15803d" : "inherit",
