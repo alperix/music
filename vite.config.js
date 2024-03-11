@@ -37,6 +37,11 @@ const configuration = ({ mode }) => {
         server: { port: 3000 },
         define: define,
         plugins: plugins,
+        resolve: {
+            alias: {
+                "@": resolve(__dirname, "./src"),
+            }
+        },
         css: {
             postcss: {
                 plugins: [postcssImport(), tailwindcss(), autoprefixer()]
