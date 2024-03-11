@@ -33,5 +33,7 @@
         "plugin:react-hooks/recommended",
         "prettier"
     ],
-    "rules": {}
+    "rules": {
+        "react/prop-types": "off"
+    }
 }
