@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { de } from "../core/resources/de";
+import text from "../core/resources/Texts.json";
+
 import { useCatchEvent } from "../core/services/CustomEvents";
 import { modules } from "../core/domain/Routes";
 import { Icon } from "../atoms/Icon";
@@ -17,7 +18,7 @@ export const Header = () => {
     useCatchEvent("module-changed", (m: string) => {
         const path = modules[m];
         setModule(path);
-        document.title = `${de.shortTitle}/${path}`;
+        document.title = `${text.App.shortTitle}/${path}`;
     });   
 
     return (
@@ -29,7 +30,7 @@ export const Header = () => {
                     </button>
                     <div className="links" onClick={() => setOpen(false)}>
                         <Link to="/">
-                            <div className="f500 text-2xl">{de.title}</div>
+                            <div className="f500 text-2xl">{text.App.title}</div>
                         </Link>
                         {module && <div className="module-name">{module}</div>}
                     </div>

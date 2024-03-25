@@ -1,0 +1,15 @@
+{
+    "App": {
+        "title": "Musikschulverwaltung",
+        "shortTitle": "MSV"
+    },
+    "validation": {
+        "required": "Dieses Feld ist verpflichtend.",
+        "age": "Bitte geben Sie ein gültiges Alter ein. (8..150)",
+        "SVN": "Bitte geben Sie eine gültige Sozialversicherungsnummer ein.",
+        "email": "Bitte geben Sie eine gültige E-mail-Adresse an.",
+        "tel": "Bitte geben Sie eine gültige Telefonnummer ein.",
+        "address": "Bitte geben Sie eine gültige Addresse in der folgenden Form ein: Straße(mit oder ohne Hausnummer), PLZ Ort",
+        "birthday": "Bitte geben Sie ein gültiges Geburtsdatum ein."
+    }
+}
