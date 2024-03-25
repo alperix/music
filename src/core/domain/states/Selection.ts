@@ -2,7 +2,7 @@ import lists from "@/core/resources/Lists.json";
 
 export type selection = {
     index: number;
-    value: string;
+    selected: string;
 };
 
 export type multiSelection = selection[];
@@ -11,6 +11,7 @@ export type groupSelection = Record<string, selection>
 
 export type selectionInputProps = {
     name: string
+    value: selection | null
     options: string[]
     onChange: (value: selection) => void
 };

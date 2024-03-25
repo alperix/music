@@ -1,14 +1,12 @@
+import React from "react";
+
 import { selectionInputProps } from "@/core/domain/states/Selection";
 
-import React, { useState } from "react";
-
-export const Radios = ({ name, options, onChange }: selectionInputProps) => {
-    const [selectedValue, setSelectedValue] = useState<string>("");
+export const Radios = ({ name, value, options, onChange }: selectionInputProps) => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
-        setSelectedValue(value);
-        onChange({ value: value, index: options.indexOf(value) });
+        onChange({ selected: value, index: options.indexOf(value) });
     };
 
     return (
@@ -19,7 +17,7 @@ export const Radios = ({ name, options, onChange }: selectionInputProps) => {
                         name={name}
                         type="radio"
                         value={option}
-                        checked={selectedValue === option}
+                        checked={value?.selected === option}
                         onChange={handleChange}
                     />
                     {option}
