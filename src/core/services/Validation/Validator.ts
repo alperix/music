@@ -3,58 +3,61 @@ import { useEffect, useState, useCallback } from "react";
 import { Rules } from "./Rules";
 
 export const useValidator = () => {
-	const [value, setValue] = useState("");
-	const [valid, setValid] = useState(true);
-	const [error, setError] = useState("");
+    const [value, setValue] = useState("");
+    const [valid, setValid] = useState(true);
+    const [error, setError] = useState("");
 
-	const [deal, setDeal] = useState({
-		required: false,
-		requiredMsg: null,
-		rules: "",
-		custom: null
-	});
+    const [deal, setDeal] = useState({
+        required: false,
+        requiredMsg: null,
+        rules: "",
+        custom: null
+    });
 
-	const validate = useCallback(() => {
+    const validate = useCallback(() => {
         const ruleKeys = Object.keys(Rules);
 
-		const keys =
-			deal.rules && value
-				? deal.rules
-						.toUpperCase()
-						.split(",")
-						.map((r) => r.trim())
-                        .filter(k => ruleKeys.includes(k))
-				: [];
+        const keys =
+            deal.rules && value
+                ? deal.rules
+                      .toUpperCase()
+                      .split(",")
+                      .map((r) => r.trim())
+                      .filter((k) => ruleKeys.includes(k))
+                : [];
 
-		if (deal.required) keys.unshift("REQ");
+        if (deal.required) keys.unshift("REQ");
 
-		const rules = keys.reduce((r , key) => {
-				r[key] = Rules[key as keyof typeof Rules];
-				return r;
-			}, {} as Record<string, (v:string) => string>);
+        const rules = keys.reduce(
+            (r, key) => {
+                r[key] = Rules[key as keyof typeof Rules];
+                return r;
+            },
+            {} as Record<string, (v: string) => string>
+        );
 
-		if (deal.custom && value) rules.custom = deal.custom;
+        if (deal.custom && value) rules.custom = deal.custom;
 
-		let msg = "";
+        let msg = "";
 
-		Object.keys(rules).forEach((key) => {
-			if (msg) return msg;
-			const rule = rules[key];
+        Object.keys(rules).forEach((key) => {
+            if (msg) return msg;
+            const rule = rules[key];
 
-			msg = rule(value);
-			
-			if (key === "REQ" && msg && deal.requiredMsg)
-				msg = deal.requiredMsg;
-		});
+            msg = rule(value);
 
-		return msg;
-	}, [deal, value]);
+            if (key === "REQ" && msg && deal.requiredMsg)
+                msg = deal.requiredMsg;
+        });
 
-	useEffect(() => {
-		const err = validate();
-		setError(err);
-		setValid(!err);
-	}, [validate]);
+        return msg;
+    }, [deal, value]);
 
-	return { setValue, setDeal, valid, error };
+    useEffect(() => {
+        const err = validate();
+        setError(err);
+        setValid(!err);
+    }, [validate]);
+
+    return { setValue, setDeal, valid, error };
 };
