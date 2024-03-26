@@ -1,22 +1,22 @@
 import React from "react";
 
-import { groupSelection, reportKey } from "@/core/domain/states/Selection";
+import { reportKey, singleSelection } from "@/core/domain/states/Selection";
 
 import { RadioReports } from "./RadioReports";
 
 type Props = {
-    values: groupSelection;
+    value: singleSelection | null;
     resKeys: reportKey[];
-    onChange: (values: groupSelection) => void;
+    onChange: (value: singleSelection) => void;
 };
 
-export const RadioFilterGroup = ({ resKeys, values, onChange }: Props) => {
+export const RadioReportsGroup = ({ resKeys, value, onChange }: Props) => {
     return resKeys.map((rk) => (
         <RadioReports
             key={`${rk}-reports`}
             resKey={rk}
-            value={values[rk]}
-            onChange={(key, value) => onChange({ ...values, [key]: value })}
+            value={value && value.key === rk ? value : null}
+            onChange={(key, value) => onChange({ key, ...value })}
         />
     ));
 };

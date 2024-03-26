@@ -8,6 +8,7 @@ export type selection = {
 export type multiSelection = selection[];
 
 export type groupSelection = Record<string, selection>
+export type singleSelection = selection & { key: string }
 
 export type selectionInputProps = {
     name: string
