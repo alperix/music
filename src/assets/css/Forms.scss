@@ -1,5 +1,6 @@
 input[type="text"],
 input[type="password"],
+select,
 textarea {
     display: block;
     font-family: "font-regular";
@@ -99,7 +100,7 @@ label {
         font-family: "font-regular";
         font-weight: normal;
         display: inline-flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 8px;
     }
 

@@ -11,13 +11,18 @@ type Props = {
 };
 
 export const RadioFilterGroup = ({ resKeys, values, onChange }: Props) => {
-
-    return resKeys.map((rk) => (
-        <RadioFilter
-            key={`${rk}-filter`}
-            resKey={rk}
-            value={values[rk]}
-            onChange={(key, value) => onChange({ ...values, [key]: value })}
-        />
-    ));
+    return (
+        <div className="flex justify-start align-top gap-8">
+            {resKeys.map((rk) => (
+                <RadioFilter
+                    key={`${rk}-filter`}
+                    resKey={rk}
+                    value={values[rk]}
+                    onChange={(key, value) =>
+                        onChange({ ...values, [key]: value })
+                    }
+                />
+            ))}
+        </div>
+    );
 };

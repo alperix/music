@@ -4,8 +4,8 @@ export type ContentProps = {
     text: string;
     textSR?: string;
     wrap?: boolean;
-    required: boolean;
-    disabled: boolean;
+    required?: boolean;
+    disabled?: boolean;
 };
 
 export type LabelProps = ContentProps & {

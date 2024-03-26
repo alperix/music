@@ -4,20 +4,26 @@ import lists from "@/core/resources/Lists.json";
 import { selection, selectionKey } from "@/core/domain/states/Selection";
 
 import { Radios } from "@/atoms/Radios";
+import { Label } from "@/atoms/Label";
 
 type Props = {
-    value: selection | null
-    resKey: selectionKey
-    onChange: (key: string, value: selection) => void
+    value: selection | null;
+    resKey: selectionKey;
+    onChange: (key: string, value: selection) => void;
 };
 
 export const RadioFilter = ({ resKey, value, onChange }: Props) => {
     return (
-        <Radios
-            name={resKey}
-            value={value}
-            options={lists.Selection[resKey]}
-            onChange={(value) => onChange(resKey, value)}
-        />
+        <div>
+            <div className="my-4">
+                <Label text={resKey} htmlFor={resKey} />
+            </div>
+            <Radios
+                name={resKey}
+                value={value}
+                options={lists.Selection[resKey]}
+                onChange={(value) => onChange(resKey, value)}
+            />
+        </div>
     );
 };

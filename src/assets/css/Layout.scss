@@ -84,12 +84,12 @@ main {
         position: relative;
 
         .module-content {
+            overflow-y: auto;
+            margin-top: 50px;
             
             .feature-content, .page {
-                margin-top: 50px;
-                padding: 1.2rem;
+                padding: 0.5rem 1rem;
                 height: calc(100vh - 150px);
-                overflow-y: auto;
             }
         }
     }

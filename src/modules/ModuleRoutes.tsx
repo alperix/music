@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import {
@@ -10,21 +10,31 @@ import {
 } from "../core/domain/Routes";
 
 import { RouterLink } from "../atoms/RouterLink";
-import { FeatureView } from "../pages/FeatureView";
 import { useCatchEvent } from "../core/services/CustomEvents";
+
+import { FeatureView } from "../pages/FeatureView";
+import { ReportsView } from "@/pages/registration/ReportsView";
 
 const routes = (m: module) => featureRoutes[m];
 
+const component = (fr: route) => {  
+    const views: Record<module, Record<feature, ReactNode>> = {
+        registration: {
+            reports: <ReportsView feature={fr.feature} />
+        }
+    };
+
+    return (
+        views[fr.module]?.[fr.feature] ?? <FeatureView feature={fr.feature} />
+    );
+};
+
 export const Index = (m: module) => (
-    <Route index element={<FeatureView feature={routes(m)[0].feature} />} />
+    <Route index element={component(routes(m)[0])} />
 );
 
 export const ModuleRoute = (fr: route) => (
-    <Route
-        key={fr.name}
-        path={fr.path}
-        element={<FeatureView feature={fr.feature} />}
-    />
+    <Route key={fr.name} path={fr.path} element={component(fr)} />
 );
 
 export const ModuleRoutes = ({ module }: ModuleProp) => (
