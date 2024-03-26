@@ -1,0 +1,32 @@
+|    /app
+|        App Layout / Globale Styles
+|        App Routing
+|        App Navigation
+|        Context Wrapper
+|        Error Boundaries
+|    /modules
+|        Module intern Routing
+|        Module Navigation
+|        Module Layout
+|    /pages
+|        Feature views (Navigation Targets / Route Content) 
+|    /components
+|        Views / Composite Layouts
+|        Form Handling & states
+|        Fetching / Submit
+|    /elements
+|        Custom Interaction
+|        Custom Input Layouts
+|        Custom Validations
+|        Custom Viewers
+|    /atoms
+|        Editors/Viewer for simple types
+|        Standart type validation / formatierung
+|        Bibliothek UI Components Verkapselungsschicht
+|    /core
+|        Type definitions / Declarations
+|        Resources
+|        Component Services
+|        Extern Module/Web API Adaptors
+|
+\/ Dependencies
