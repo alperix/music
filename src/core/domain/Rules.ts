@@ -1,5 +1,5 @@
 import regex from "./Regex";
-import text from "../../resources/Texts.json";
+import text from "../resources/Texts.json";
 
 const message = text.validation;
 
