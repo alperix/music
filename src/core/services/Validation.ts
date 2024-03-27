@@ -1,50 +1,64 @@
 import { useEffect, useState, useCallback } from "react";
 
+import texts from "../resources/Texts.json";
 import { Rules } from "../domain/Rules";
+import { inputChanged } from "../domain/Events";
+import { useCatchEvent } from "./CustomEvents";
 
 type ruleKey = keyof typeof Rules;
 
-export type validation = {
+export type validation<T> = {
+    name: string;
     required: boolean;
     requiredMsg?: string;
-    rules?: string;
-    custom?: (value: string) => string;
+    rules?: ruleKey[];
+    custom?: (value: T) => string;
 };
 
-export const useValidator = (deal: validation) => {
-    const [value, setValue] = useState("");
+export const useValidator = <T = string>(deal: validation<T>) => {
+    const [value, setValue] = useState<T>();
     const [valid, setValid] = useState(true);
     const [error, setError] = useState("");
 
+    const event = inputChanged(deal.name);
+
     const validate = useCallback(() => {
-        const rulesKeys = Object.keys(Rules);
+        let message = "";
 
-        const keys = (deal.rules
-            ?.toUpperCase()
-            .split(",")
-            .map((r) => r.trim())
-            .filter((k) => rulesKeys.includes(k)) || []) as ruleKey[];
+        const update = () => {
+            setError(message);
+            setValid(!message);
+        };
 
-        if (deal.required) keys.unshift("REQ");
+        if (deal.required && !value) {
+            message = deal.requiredMsg || texts.validation.required;
+            update();
+            return;
+        }
 
-        const rules = keys.reduce(
-            (r, key) => {
-                r[key] = Rules[key];
-                return r;
-            },
-            {} as Record<string, (v: string) => string>
-        );
+        if (deal.rules) {
+            const keys = [...deal.rules];
 
-        if (deal.custom) rules.custom = deal.custom;
+            const rules = keys.reduce(
+                (r, key) => {
+                    r[key] = Rules[key];
+                    return r;
+                },
+                {} as Record<string, (v: string) => string>
+            );
 
-        for (const rule of Object.values(rules)) {
-            const msg = rule(value); 
-            setError(msg);
-            setValid(!msg);
-            if (msg) break;
+            for (const rule of Object.values(rules)) {
+                message = rule(value as string);
+                update();
+                if (message) break;
+            }
+        } else if (deal.custom) {
+            message = deal.custom(value as T);
+            update();
         }
     }, [deal, value]);
 
+    useCatchEvent(event, setValue);
     useEffect(validate, [validate]);
 
     return { setValue, valid, error };
