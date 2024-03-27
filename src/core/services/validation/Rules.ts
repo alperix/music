@@ -1,9 +1,7 @@
 import regex from "./Regex";
+import messages from "./Messages.json"
+
 import { setTemplate } from "../Resources";
-
-import text from "@/core/resources/Texts.json";
-
-const message = text.validation;
 
 export type interval = {
     min?: number;
@@ -15,22 +13,22 @@ export type interval = {
 
 export const Rules = {
     REQ: (value: string) =>
-        regex.REQ.test(value.trim()) ? "" : message.required,
+        regex.REQ.test(value.trim()) ? "" : messages.required,
 
-    INT: (value: string) => (regex.INT.test(value.trim()) ? "" : message.INT),
-    INTABS: (value: string) => (regex.INTABS.test(value.trim()) ? "" : message.INTABS),
-    NUM: (value: string) => (regex.NUM.test(value.trim()) ? "" : message.NUM),
-    NUMABS: (value: string) => (regex.NUMABS.test(value.trim()) ? "" : message.NUMABS),
+    INT: (value: string) => (regex.INT.test(value.trim()) ? "" : messages.INT),
+    INTABS: (value: string) => (regex.INTABS.test(value.trim()) ? "" : messages.INTABS),
+    NUM: (value: string) => (regex.NUM.test(value.trim()) ? "" : messages.NUM),
+    NUMABS: (value: string) => (regex.NUMABS.test(value.trim()) ? "" : messages.NUMABS),
 
     EMAIL: (value: string) =>
-        regex.EMAIL.test(value.trim()) ? "" : message.email,
-    TEL: (value: string) => (regex.TEL.test(value.trim()) ? "" : message.tel),
+        regex.EMAIL.test(value.trim()) ? "" : messages.email,
+    TEL: (value: string) => (regex.TEL.test(value.trim()) ? "" : messages.tel),
     ADDRESS: (value: string) =>
-        regex.ADDRESS.test(value.trim()) ? "" : message.address,
+        regex.ADDRESS.test(value.trim()) ? "" : messages.address,
     SVN: (value: string) => {
         let check = false;
         if (regex.SVN.test(value.trim())) check = checkSvn(value);
-        return check ? "" : message.SVN;
+        return check ? "" : messages.SVN;
     }
 };
 
@@ -51,9 +49,9 @@ export const CustomRules = {
             const value = Number(data.value);
 
             if (min && max && (value < min || value > max))
-                msg = templated(message.limitNumber);
-            else if (min && value < min) msg = templated(message.minNumber);
-            else if (max && value > max) msg = templated(message.maxNumber);
+                msg = templated(messages.limitNumber);
+            else if (min && value < min) msg = templated(messages.minNumber);
+            else if (max && value > max) msg = templated(messages.maxNumber);
 
         } else {
 
@@ -62,9 +60,9 @@ export const CustomRules = {
             );
 
             if (!regex.test(data.value)) {
-                if (min && max) msg = templated(message.limitText);
-                else if (min) msg = templated(message.minText);
-                else if (max) msg = templated(message.maxText);
+                if (min && max) msg = templated(messages.limitText);
+                else if (min) msg = templated(messages.minText);
+                else if (max) msg = templated(messages.maxText);
             }
         }
 

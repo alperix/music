@@ -4,24 +4,6 @@
         "shortTitle": "MSV"
     },
     "validation": {
-        "required": "Dieses Feld ist verpflichtend.",
-
-        "SVN": "Bitte geben Sie eine gültige Sozialversicherungsnummer ein.",
-        "email": "Bitte geben Sie eine gültige E-mail-Adresse an.",
-        "tel": "Bitte geben Sie eine gültige Telefonnummer ein.",
-        "address": "Bitte geben Sie eine gültige Addresse in der folgenden Form ein: Straße(mit oder ohne Hausnummer), PLZ Ort",
-        "birthday": "Bitte geben Sie ein gültiges Geburtsdatum ein.",
-
-        "INT": "Dieser Wert muss eine ganze Zahl sein.",
-        "INTABS": "Dieser Wert muss eine positive ganze Zahl sein.",
-        "NUM": "Dieser Wert muss eine Nummer sein.",
-        "NUMABS": "Dieser Wert muss eine positive Zahl sein.",
-
-        "limitNumber": "Diese Wert sollte zwischen {min} und {max} liegen.",
-        "limitText": "Die Länge dieses Wertes sollte zwischen {min} und {max} liegen.",
-        "minNumber": "Dieser Wert kann nicht kleiner als {min} sein.",
-        "minText": "Die Länge dieses Wertes muss mindestens {min} betragen.",
-        "maxNumber": "Dieser Wert darf nicht höher als {max} sein.",
-        "maxText": "Die Länge dieses Wertes darf maximal {max} betragen."
+        "required": "Dieses Feld ist verpflichtend."
     }
 }
