@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { Rules } from "../domain/Rules";
-import { inputChanged } from "../domain/Events";
-import { useCatchEvent } from "./CustomEvents";
+import { Rules } from "./Rules";
+import { inputChanged } from "../events/Events";
+import { useCatchEvent } from "../events/CustomEvents";
 
 type ruleKey = keyof typeof Rules;
 

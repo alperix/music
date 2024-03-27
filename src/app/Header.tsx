@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 import text from "../core/resources/Texts.json";
 
-import { useCatchEvent } from "../core/services/CustomEvents";
+import { useCatchEvent } from "@/core/services/events/CustomEvents";
 import { modules } from "../core/domain/Routes";
 import { Icon } from "../atoms/Icon";
 
 import { AppLinks } from "./AppRoutes";
+
 
 export const Header = () => {
     const [module, setModule] = useState("");

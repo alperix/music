@@ -1,7 +1,7 @@
 import regex from "./Regex";
+import { setTemplate } from "../Resources";
 
-import text from "../resources/Texts.json";
-import { setTemplate } from "../services/Resources";
+import text from "@/core/resources/Texts.json";
 
 const message = text.validation;
 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { moduleRoutes, module, route } from "../core/domain/Routes";
-import { RouterLink } from "../atoms/RouterLink";
+import { moduleRoutes, module, route } from "@/core/domain/Routes";
+import { useCatchEvent } from "@/core/services/events/CustomEvents";
 
-import { ModuleView } from "../modules/ModuleView";
-import { useCatchEvent } from "../core/services/CustomEvents";
+import { RouterLink } from "@/atoms/RouterLink";
+import { ModuleView } from "@/modules/ModuleView";
 
 const moduleKeys = Object.keys(moduleRoutes);
 const moduleRoute = (m: module) => moduleRoutes[m];

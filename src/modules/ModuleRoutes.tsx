@@ -7,12 +7,11 @@ import {
     route,
     module,
     feature
-} from "../core/domain/Routes";
+} from "@/core/domain/Routes";
+import { useCatchEvent } from "@/core/services/events/CustomEvents";
 
-import { RouterLink } from "../atoms/RouterLink";
-import { useCatchEvent } from "../core/services/CustomEvents";
-
-import { FeatureView } from "../pages/FeatureView";
+import { RouterLink } from "@/atoms/RouterLink";
+import { FeatureView } from "@/pages/FeatureView";
 import { ReportsView } from "@/pages/registration/ReportsView";
 
 const routes = (m: module) => featureRoutes[m];
