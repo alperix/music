@@ -15,11 +15,11 @@ export const getResource = (obj: NestedText, path: string): string => {
     return getResource(obj[cur] as NestedText, rest.join("."));
 };
 
-export const setTemplate = (text: string, vars: Record<string, string>) => {
+export const setTemplate = (text: string, vars: Record<string, unknown>) => {
     let result = text;
 
     Object.keys(vars).forEach(
-        (key) => (result = result.replace(`{${key}}`, vars[key]))
+        (key) => (result = result.replace(`{${key}}`, vars[key] as string))
     );
 
     return result;

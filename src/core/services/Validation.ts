@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 
-import texts from "../resources/Texts.json";
 import { Rules } from "../domain/Rules";
 import { inputChanged } from "../domain/Events";
 import { useCatchEvent } from "./CustomEvents";
@@ -31,7 +30,7 @@ export const useValidator = <T = string>(deal: validation<T>) => {
         };
 
         if (deal.required && !value) {
-            message = deal.requiredMsg || texts.validation.required;
+            message = deal.requiredMsg || Rules.REQ("");
             update();
             return;
         }
