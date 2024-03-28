@@ -82,7 +82,7 @@ export const featureRoutes: Record<module, route[]> = Object.keys(
         ...routes,
         [m]: moduleFeatures[m].map((f) => ({
             name: features[f],
-            path: `/${f}`,
+            path: f,
             icon: featureIcons[f],
             module: m,
             feature: f

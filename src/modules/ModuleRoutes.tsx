@@ -51,10 +51,7 @@ export const ModuleLinks = ({ module }: ModuleProp) => {
     return routes(module).map((fr) => (
         <RouterLink
             key={fr.name}
-            route={{
-                ...fr,
-                path: `/${module}${fr.path}`
-            }}
+            route={fr}
             selected={selected == fr.feature}
         />
     ));
