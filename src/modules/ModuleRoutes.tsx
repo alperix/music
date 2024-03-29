@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import {
-    featureRoutes,
+    moduleRoutes,
     ModuleProp,
     route,
     module,
@@ -12,7 +12,7 @@ import { RouterLink } from "@/atoms/RouterLink";
 import { useCatchEvent } from "@/core/services/events/CustomEvents";
 import { FeatureComponent } from "@/pages/FeatureRegister";
 
-const routes = (m: module) => featureRoutes[m];
+const routes = (m: module) => moduleRoutes[m];
 
 export const Index = (fr: route) => (
     <Route index element={FeatureComponent(fr)} />

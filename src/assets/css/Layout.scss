@@ -96,8 +96,6 @@ main {
     .module-content {
         overflow-y: auto;
         height: calc(100vh - 150px); 
-        padding: 1rem 2rem;
-
         //.feature
     }
 }
@@ -109,6 +107,7 @@ main {
 
     .feature-content {
         width: 100%;
+        padding: 1rem 2rem;
         display: flex;
         flex-direction: column;
     }

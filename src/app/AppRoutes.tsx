@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { moduleRoutes, module, route } from "@/core/domain/Routes";
+import { appRoutes, module, route } from "@/core/domain/Routes";
 import { useCatchEvent } from "@/core/services/events/CustomEvents";
 
 import { RouterLink } from "@/atoms/RouterLink";
 import { ModuleView } from "@/modules/ModuleView";
 
-const moduleKeys = Object.keys(moduleRoutes);
-const moduleRoute = (m: module) => moduleRoutes[m];
+const moduleKeys = Object.keys(appRoutes);
+const moduleRoute = (m: module) => appRoutes[m];
 
 export const Index = () => (
     <Route index element={<ModuleView module={moduleKeys[0]} />} />

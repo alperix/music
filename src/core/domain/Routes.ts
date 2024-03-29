@@ -67,7 +67,7 @@ export type route = {
     icon?: string;
 };
 
-export const moduleRoutes: Record<module, route> = Object.keys(modules).reduce(
+export const appRoutes: Record<module, route> = Object.keys(modules).reduce(
     (routes, m) => ({
         ...routes,
         [m]: { name: modules[m], path: `/${m}`, module: m, feature: "" }
@@ -75,7 +75,7 @@ export const moduleRoutes: Record<module, route> = Object.keys(modules).reduce(
     {}
 );
 
-export const featureRoutes: Record<module, route[]> = Object.keys(
+export const moduleRoutes: Record<module, route[]> = Object.keys(
     modules
 ).reduce(
     (routes, m) => ({
