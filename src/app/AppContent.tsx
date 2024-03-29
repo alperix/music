@@ -3,15 +3,15 @@ import React from "react";
 import { AppRoutes, AppLinks } from "./AppRoutes";
 import { emitEvent } from "@/core/services/events/CustomEvents";
 
-export const Content = () => (
+export const AppContent = () => (
     <section
-        className="content"
+        className="app-content"
         onClick={() => emitEvent("toggle-burger", false)}
     >
-        <nav className="left-nav">
+        <nav className="app-nav">
             <AppLinks />
         </nav>
-        <section className="app-content">
+        <section className="module">
             <AppRoutes />
         </section>
     </section>

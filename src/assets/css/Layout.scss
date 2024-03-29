@@ -7,11 +7,6 @@ main {
     width: 100%;
 }
 
-main {
-    overflow: hidden;
-    position: relative;
-}
-
 .header {
     z-index: 100;
     height: 70px;
@@ -69,38 +64,49 @@ main {
     }
 }
 
-.content {
-    z-index: 0;
-    margin-top: 70px;
-    margin-bottom: 36px;
-    display: flex;
-    width: 100%;
-    height: calc(100vh - 100px);
+.app {
+    overflow: hidden;
+    position: relative;
+
+    //.header
 
     .app-content {
-        flex: 1;
+        z-index: 0;
+        margin-top: 70px;
+        margin-bottom: 36px;
+        display: flex;
         width: 100%;
-        background-color: #fff;
-        position: relative;
+        height: calc(100vh - 100px);
+    
+        //.app-nav
+        //.module
+    }
 
-        .module-content {
-            overflow-y: auto;
-            margin-top: 50px;
-            
-            .feature-content, .page {
-                padding: 0.5rem 1rem;
-                height: calc(100vh - 150px);
-            }
-        }
+    //.footer
+}
+
+.module {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    //.module-nav
+
+    .module-content {
+        overflow-y: auto;
+        height: calc(100vh - 150px); 
+        padding: 1rem 2rem;
+
+        //.feature
     }
 }
 
-.centered-content {
+.feature {
     display: flex;
     justify-content: center;
     width: 100%;
 
-    .content-container {
+    .feature-content {
         width: 100%;
         display: flex;
         flex-direction: column;

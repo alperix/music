@@ -3,13 +3,16 @@ import React, { useState } from "react";
 import FormContainer from "@/atoms/FormContainer";
 
 import { singleSelection } from "@/core/domain/states/Selection";
-import { defaultState, resourceKeys } from "@/core/domain/defaults/ReportsFormState";
+import {
+    defaultState,
+    resourceKeys
+} from "@/core/domain/defaults/registration/ReportsFormState";
 
 import { RadioFilterGroup } from "@/elements/RadioFilterGroup";
 import { DropFilterGroup } from "@/elements/DropFilterGroup";
 import { RadioReportsGroup } from "@/elements/RadioReportsGroup";
 
-export const ReportsForm = ({ feature }: { feature: string }) => {
+export const ReportsForm = ({ featureName }: { featureName: string }) => {
     const [data, setData] = useState(defaultState);
 
     const submit = (report: singleSelection) => {
@@ -18,7 +21,7 @@ export const ReportsForm = ({ feature }: { feature: string }) => {
     };
 
     return (
-        <FormContainer id={`registration-${feature}-form`}>
+        <FormContainer id={`registration-${featureName}-form`}>
             <RadioFilterGroup
                 resKeys={resourceKeys.filter}
                 values={data.filter}

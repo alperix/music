@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import {
@@ -8,37 +8,23 @@ import {
     module,
     feature
 } from "@/core/domain/Routes";
-import { useCatchEvent } from "@/core/services/events/CustomEvents";
-
 import { RouterLink } from "@/atoms/RouterLink";
-import { FeatureView } from "@/pages/FeatureView";
-import { ReportsView } from "@/pages/registration/ReportsView";
+import { useCatchEvent } from "@/core/services/events/CustomEvents";
+import { FeatureComponent } from "@/pages/FeatureRegister";
 
 const routes = (m: module) => featureRoutes[m];
 
-const component = (fr: route) => {  
-    const views: Record<module, Record<feature, ReactNode>> = {
-        registration: {
-            reports: <ReportsView feature={fr.feature} />
-        }
-    };
-
-    return (
-        views[fr.module]?.[fr.feature] ?? <FeatureView feature={fr.feature} />
-    );
-};
-
-export const Index = (m: module) => (
-    <Route index element={component(routes(m)[0])} />
+export const Index = (fr: route) => (
+    <Route index element={FeatureComponent(fr)} />
 );
 
 export const ModuleRoute = (fr: route) => (
-    <Route key={fr.name} path={fr.path} element={component(fr)} />
+    <Route key={fr.name} path={fr.path} element={FeatureComponent(fr)} />
 );
 
 export const ModuleRoutes = ({ module }: ModuleProp) => (
     <Routes>
-        {Index(module)}
+        {Index(routes(module)[0])}
         {routes(module).map((fr) => ModuleRoute(fr))}
     </Routes>
 );

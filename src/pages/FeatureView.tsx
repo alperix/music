@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 
 import { emitEvent } from "@/core/services/events/CustomEvents";
-import { FeatureProp, features } from "@/core/domain/Routes";
-import { NotImplemented } from "@/atoms/NotImplemented";
+import { FeatureProp } from "@/core/domain/Routes";
 
-import { FeatureContent } from "./FeatureContent";
-
-export const FeatureView = ({ feature }: FeatureProp) => {
+export const FeatureView = ({
+    children,
+    feature
+}: PropsWithChildren & FeatureProp) => {
     useEffect(() => emitEvent("feature-changed", feature), [feature]);
 
     return (
-        <FeatureContent>
-            <NotImplemented title={features[feature]}/>
-        </FeatureContent>
+        <section className="feature">
+            <div className="feature-content">{children}</div>
+        </section>
     );
 };
