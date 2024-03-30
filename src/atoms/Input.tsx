@@ -1,25 +1,18 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 
 import { Label } from "./Label";
 
-export type InputProps = {
-    name: string;
+export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     label: string;
-    labelSR?: string;
-    value: string;
-    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-    required?: boolean;
-    disabled?: boolean;
 };
 
 export const Input = ({
     name,
-    label,
-    labelSR,
     value,
-    onChange,
     required,
     disabled,
+    onChange,
+    label,
     ...restProps
 }: InputProps) => {
     return (
@@ -27,13 +20,13 @@ export const Input = ({
             <Label
                 htmlFor={name}
                 text={label}
-                textSR={labelSR}
-                required={required ?? false}
-                disabled={disabled ?? false}
+                required={required}
+                disabled={disabled}
             />
             <div className="flex self-baseline">
                 <div className="flex-1">
                     <input
+                        id={name}
                         name={name}
                         value={value}
                         type={"text"}

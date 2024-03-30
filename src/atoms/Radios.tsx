@@ -1,6 +1,6 @@
 import React from "react";
 
-import { selectionInputProps } from "@/core/domain/states/Selection";
+import { selectionInputProps } from "./Types";
 
 export const Radios = ({
     name,
@@ -8,6 +8,7 @@ export const Radios = ({
     options,
     onChange
 }: selectionInputProps) => {
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         onChange({ selected: value, index: options.indexOf(value) });

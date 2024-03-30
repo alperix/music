@@ -1,4 +1,5 @@
-import { groupSelection, reportKey, selectionKey, singleSelection } from "../../states/Selection";
+import { reportKey, selectionKey } from "@/core/resources/Types";
+import { groupSelection, singleSelection } from "@/core/domain/ui/Selection";
 
 export const resourceKeys = {
     filter: ["Fachgruppe", "Zentralfachgruppen", "Etiketten"] as selectionKey[],

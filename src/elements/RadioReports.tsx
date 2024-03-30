@@ -1,7 +1,9 @@
 import React from "react";
 
 import lists from "@/core/resources/Lists.json";
-import { selection, reportKey } from "@/core/domain/states/Selection";
+
+import { selection } from "@/core/domain/ui/Selection";
+import { reportKey } from "@/core/resources/Types";
 
 import { Radios } from "@/atoms/Radios";
 import { Label } from "@/atoms/Label";

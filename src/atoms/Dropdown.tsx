@@ -1,6 +1,6 @@
 import React from "react";
 
-import { selectionInputProps } from "@/core/domain/states/Selection";
+import { selectionInputProps } from "./Types";
 
 export const Dropdown = ({ name, value, options, onChange }: selectionInputProps) => {
     

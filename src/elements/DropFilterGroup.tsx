@@ -2,7 +2,8 @@ import React from "react";
 
 import lists from "@/core/resources/Lists.json";
 
-import { groupSelection, selectionKey } from "@/core/domain/states/Selection";
+import { groupSelection } from "@/core/domain/ui/Selection";
+import { selectionKey } from "@/core/resources/Types";
 
 import { Dropdown } from "@/atoms/Dropdown";
 import { Label } from "@/atoms/Label";

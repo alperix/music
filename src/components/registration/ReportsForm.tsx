@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import FormContainer from "@/atoms/FormContainer";
 
-import { singleSelection } from "@/core/domain/states/Selection";
+import { singleSelection } from "@/core/domain/ui/Selection";
 import {
     defaultState,
     resourceKeys

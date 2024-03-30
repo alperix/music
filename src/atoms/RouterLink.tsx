@@ -1,6 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { route } from "../core/domain/Routes";
+
+import { Link } from "react-router-dom";
 import { Icon } from "./Icon";
 
 type LinkProps = { route: route; selected?: boolean };

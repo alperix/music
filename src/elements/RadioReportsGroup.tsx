@@ -1,6 +1,7 @@
 import React from "react";
 
-import { reportKey, singleSelection } from "@/core/domain/states/Selection";
+import { singleSelection } from "@/core/domain/ui/Selection";
+import { reportKey } from "@/core/resources/Types";
 
 import { RadioReports } from "./RadioReports";
 

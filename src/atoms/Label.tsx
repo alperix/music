@@ -1,4 +1,4 @@
-import React from "react";
+import React, { LabelHTMLAttributes } from "react";
 
 export type ContentProps = {
     text: string;
@@ -8,11 +8,7 @@ export type ContentProps = {
     disabled?: boolean;
 };
 
-export type LabelProps = ContentProps & {
-    htmlFor: string;
-    className?: string;
-    style?: Record<string, string>;
-};
+export type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & ContentProps;
 
 export const LabelContent = ({
     text,
@@ -43,29 +39,15 @@ export const LabelContent = ({
 };
 
 export const Label = ({
-    htmlFor,
-    style = {},
-    className = "",
-    text = "",
+    text,
     textSR = "",
     wrap = false,
     required = false,
     disabled = false,
     ...restProps
 }: LabelProps) => {
-    let short = text.slice(0, 16);
-    if (text.length > short.length) short += "...";
-
     return (
-        <label
-            htmlFor={htmlFor}
-            className={className}
-            style={{
-                pointerEvents: "none",
-                ...style
-            }}
-            {...restProps}
-        >
+        <label {...restProps}>
             <LabelContent
                 text={text}
                 textSR={textSR}
