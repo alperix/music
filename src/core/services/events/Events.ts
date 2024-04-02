@@ -1,1 +1,1 @@
-export const inputChanged = (name: string) => `form-input-${name}-changed`;
+export const inputChanged = (name: string) => `input-element-${name}-changed`;

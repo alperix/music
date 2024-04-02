@@ -1,25 +1,32 @@
 import regex from "./Regex";
-import messages from "./Messages.json"
+import messages from "./Messages.json";
 
 import { setTemplate } from "../Resources";
+
+export type rule<T> = (v: T) => string;
+export type ruleKey = keyof typeof Rules;
+export type numericKey = keyof typeof NumericRules;
 
 export type interval = {
     min?: number;
     max?: number;
     value: string;
     number?: boolean;
-    regex?: keyof typeof Rules;
+    regex?: numericKey;
+};
+
+export const NumericRules = {
+    INT: (value: string) => (regex.INT.test(value.trim()) ? "" : messages.INT),
+    INTABS: (value: string) =>
+        regex.INTABS.test(value.trim()) ? "" : messages.INTABS,
+    NUM: (value: string) => (regex.NUM.test(value.trim()) ? "" : messages.NUM),
+    NUMABS: (value: string) =>
+        regex.NUMABS.test(value.trim()) ? "" : messages.NUMABS
 };
 
 export const Rules = {
     REQ: (value: string) =>
         regex.REQ.test(value.trim()) ? "" : messages.required,
-
-    INT: (value: string) => (regex.INT.test(value.trim()) ? "" : messages.INT),
-    INTABS: (value: string) => (regex.INTABS.test(value.trim()) ? "" : messages.INTABS),
-    NUM: (value: string) => (regex.NUM.test(value.trim()) ? "" : messages.NUM),
-    NUMABS: (value: string) => (regex.NUMABS.test(value.trim()) ? "" : messages.NUMABS),
-
     EMAIL: (value: string) =>
         regex.EMAIL.test(value.trim()) ? "" : messages.email,
     TEL: (value: string) => (regex.TEL.test(value.trim()) ? "" : messages.tel),
@@ -29,22 +36,19 @@ export const Rules = {
         let check = false;
         if (regex.SVN.test(value.trim())) check = checkSvn(value);
         return check ? "" : messages.SVN;
-    }
-};
+    },
 
-export const CustomRules = {
-    LIMITS: (data: interval) => {
+    ...NumericRules,
+
+    INTERVAL: (data: interval) => {
         const { min, max } = data;
         const templated = (m: string) => setTemplate(m, { min, max });
         let msg = "";
 
         if (data.number) {
-
-            if (data.regex)
-            {
-                msg = Rules[data.regex](data.value);
-                if (msg) return msg;
-            }        
+            const rule = data.regex || "NUM";
+            msg = NumericRules[rule](data.value);
+            if (msg) return msg;
 
             const value = Number(data.value);
 
@@ -52,9 +56,7 @@ export const CustomRules = {
                 msg = templated(messages.limitNumber);
             else if (min && value < min) msg = templated(messages.minNumber);
             else if (max && value > max) msg = templated(messages.maxNumber);
-
         } else {
-
             const regex = new RegExp(
                 `^.{${min ? min : ""}, ${max ? max : ""}}$`
             );
