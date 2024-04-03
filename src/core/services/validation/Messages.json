@@ -1,5 +1,6 @@
 {
     "required": "Dieses Feld ist verpflichtend.",
+    "selection": "Bitte treffen Sie eine Auswahl.",
 
     "SVN": "Bitte geben Sie eine gültige Sozialversicherungsnummer ein.",
     "email": "Bitte geben Sie eine gültige E-mail-Adresse an.",

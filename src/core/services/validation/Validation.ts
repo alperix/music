@@ -10,18 +10,15 @@ export type validationStatus = {
     valid: boolean;
 };
 
-export type ValidationInput = {
-    validation?: boolean;
-    requiredMsg?: string;
-    onValidate?: (v: validationStatus) => void;
-    rules: ruleKey[];
-};
-
 export type Validation = {
     name: string;
     required?: boolean;
+    requiredMsg?: string;
+    onValidate?: (v: validationStatus) => void;
+    rules?: ruleKey[];
+    validation?: boolean;
     // event?: boolean;
-} & ValidationInput;
+}
 
 export const useValidator = <T>(value : T, deal: Validation) => {
     const [valid, setValid] = useState(true);
@@ -29,8 +26,6 @@ export const useValidator = <T>(value : T, deal: Validation) => {
 
     const validate = useCallback(() => {
         let message = "";
-
-        if (!deal.required || !deal.rules.length) return;
 
         if (deal.required && !value) {
             message = deal.requiredMsg || Rules.REQ("");

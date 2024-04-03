@@ -3,5 +3,6 @@ export type selection = {
     selected: string;
 };
 
-export type groupSelection = Record<string, selection>
 export type singleSelection = selection & { key: string }
+export type groupSelection = Record<string, selection>
+export type groupEditorData = Record<string, selection | string>

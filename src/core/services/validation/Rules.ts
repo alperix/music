@@ -2,6 +2,7 @@ import regex from "./Regex";
 import messages from "./Messages.json";
 
 import { setTemplate } from "../Resources";
+import { selection } from "@/core/domain/ui/Selection";
 
 export type rule<T> = (v: T) => string;
 export type ruleKey = keyof typeof Rules;
@@ -40,6 +41,9 @@ export const Rules = {
 
     ...NumericRules,
 
+    SELECT: (data: selection) =>
+        (data.index > 0 || data.selected) ? "" : messages.selection,
+
     INTERVAL: (data: interval) => {
         const { min, max } = data;
         const templated = (m: string) => setTemplate(m, { min, max });
@@ -58,7 +62,7 @@ export const Rules = {
             else if (max && value > max) msg = templated(messages.maxNumber);
         } else {
             const regex = new RegExp(
-                `^.{${min ? min : ""}, ${max ? max : ""}}$`
+                `^.{${min ? min : "0"},${max ? max : ""}}$`
             );
 
             if (!regex.test(data.value)) {

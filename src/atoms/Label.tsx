@@ -1,19 +1,19 @@
-import React, { LabelHTMLAttributes } from "react";
+import React, { LabelHTMLAttributes, PropsWithChildren } from "react";
 
 export type ContentProps = {
     text: string;
     textSR?: string;
-    wrap?: boolean;
     required?: boolean;
     disabled?: boolean;
 };
 
 export type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & ContentProps;
+export type ContainerProps = LabelProps &
+    PropsWithChildren & { horizontal?: boolean; full?: boolean };
 
 export const LabelContent = ({
     text,
     textSR,
-    wrap,
     required,
     disabled
 }: ContentProps) => {
@@ -22,7 +22,6 @@ export const LabelContent = ({
     return (
         <span
             style={{
-                whiteSpace: wrap ? "inherit" : "nowrap",
                 opacity: disabled ? "0.5" : "1.0"
             }}
         >
@@ -40,10 +39,9 @@ export const LabelContent = ({
 
 export const Label = ({
     text,
-    textSR = "",
-    wrap = false,
-    required = false,
-    disabled = false,
+    textSR,
+    required,
+    disabled,
     ...restProps
 }: LabelProps) => {
     return (
@@ -51,10 +49,26 @@ export const Label = ({
             <LabelContent
                 text={text}
                 textSR={textSR}
-                wrap={wrap}
                 required={required}
                 disabled={disabled}
             />
         </label>
+    );
+};
+
+export const LabelContainer = ({
+    children,
+    full,
+    horizontal,
+    ...restProps
+}: ContainerProps) => {
+    const contClass = `flex ${horizontal ? "flex-row" : "flex-col"} items-baseline`;
+    const inputClass = `${full ? "w-full" : ""} ${horizontal ? "ml-4" : "mt-2"}`;
+
+    return (
+        <div className={contClass}>
+            <Label {...restProps} />
+            <div className={inputClass}>{children}</div>
+        </div>
     );
 };

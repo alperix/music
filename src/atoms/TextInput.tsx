@@ -2,7 +2,7 @@ import React from "react";
 
 import { InputElementProps } from "./Types";
 
-export const Input = ({
+export const TextInput = ({
     name = "input",
     value,
     required,

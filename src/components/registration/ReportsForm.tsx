@@ -9,15 +9,15 @@ import {
 } from "@/core/domain/defaults/registration/ReportsFormState";
 
 import { RadioFilterGroup } from "@/elements/RadioFilterGroup";
-import { DropFilterGroup } from "@/elements/DropFilterGroup";
 import { RadioReportsGroup } from "@/elements/RadioReportsGroup";
+import { CustomEditor } from "@/elements/CustomEditor";
 
 export const ReportsForm = ({ featureName }: { featureName: string }) => {
     const [data, setData] = useState(defaultState);
 
     const submit = (report: singleSelection) => {
         setData({ ...data, report: report });
-        console.log(report, data);
+        console.log(report.key, report.selected, data);
     };
 
     return (
@@ -27,10 +27,10 @@ export const ReportsForm = ({ featureName }: { featureName: string }) => {
                 values={data.filter}
                 onChange={(values) => setData({ ...data, filter: values })}
             />
-            <DropFilterGroup
-                resKeys={resourceKeys.location}
-                values={data.location}
-                onChange={(values) => setData({ ...data, location: values })}
+            <CustomEditor
+                keys={resourceKeys.editor}
+                values={data.editor}
+                onChange={(values) => setData({ ...data, editor: values })}
             />
             <RadioReportsGroup
                 resKeys={resourceKeys.report}

@@ -1,17 +1,10 @@
 input[type="text"],
 input[type="password"],
-select,
 textarea {
     display: block;
     font-family: "font-regular";
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
-    line-height: 1.5;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #8b8f91;
-    border-radius: 8px;
-    background-color: #f6fcff;
 
     &.full {
         width: 100%;
@@ -49,8 +42,16 @@ textarea {
 }
 
 input[type="text"],
-input[type="password"] {
-    height: 3rem;
+input[type="password"],
+select
+{
+    height: 2.5rem;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #8b8f91;
+    border-radius: 0px;
+    background-color: #f6fcff;
 
     &.small {
         height: auto;

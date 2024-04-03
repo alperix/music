@@ -3,17 +3,17 @@ import React from "react";
 import { InputElementProps } from "./Types";
 
 import {
-    ValidationInput,
+    Validation,
     useValidator,
     validationStatus
 } from "@/core/services/validation/Validation";
 
 import { interval } from "@/core/services/validation/Rules";
 
-import { Input } from "./Input";
+import { TextInput } from "./TextInput";
 import { ErrorDiv } from "./Error";
 
-export type ValidInputProps = InputElementProps & ValidationInput;
+export type ValidInputProps = InputElementProps & Validation;
 
 type inputLimits = {
     minLength?: number | undefined;
@@ -85,7 +85,7 @@ export const ValidInput = ({
 
     return (
         <div>
-            <Input
+            <TextInput
                 {...restProps}
                 name={name}
                 value={value}
@@ -96,7 +96,7 @@ export const ValidInput = ({
             {validation && (
                 <ErrorDiv>
                     {validate.error && <div>{validate.error}</div>}
-                    {limits.error && <div>{limits.error}</div>}
+                    {validate.valid && limits.error && <div>{limits.error}</div>}
                 </ErrorDiv>
             )}
         </div>
