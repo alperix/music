@@ -9,7 +9,7 @@ import {
 export const resourceKeys = {
     filter: ["Fachgruppe", "Zentralfachgruppen", "Etiketten"] as selectionKey[],
     editor: ["Standorte", "Facharten", "Numeric-input", "String-input"] as string[],
-    report: ["Schulerinnen", "Controlling", "Statistik"] as reportKey[]
+    report: ["Schulerinnen", "Statistik", "Controlling"] as reportKey[]
 };
 
 const filterValues = (keys: selectionKey[]) =>

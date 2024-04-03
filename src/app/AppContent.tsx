@@ -11,8 +11,8 @@ export const AppContent = () => (
         <nav className="app-nav">
             <AppLinks />
         </nav>
-        <section className="module">
+        <div className="app-routes">
             <AppRoutes />
-        </section>
+        </div>
     </section>
 );
