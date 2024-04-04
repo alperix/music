@@ -16,8 +16,9 @@ export const ReportsForm = ({ featureName }: { featureName: string }) => {
     const [data, setData] = useState(defaultState);
 
     const submit = (report: singleSelection) => {
-        setData({ ...data, report: report });
-        console.log(report.key, report.selected, data);
+        const state = { ...data, report };
+        setData(state);
+        console.log(`${report.key}:${report.selected}`, state);
     };
 
     return (
