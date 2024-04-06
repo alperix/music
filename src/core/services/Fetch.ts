@@ -1,32 +1,53 @@
+import axios, {
+    AxiosRequestConfig as requestConfig,
+    Method as method,
+    ResponseType as responseType,
+    RawAxiosRequestHeaders as headers,
+    AxiosResponse as response,
+    AxiosError as error
+} from "axios";
+
 import { api } from "./Configuration";
 
 export type query = Record<string, string | string[] | null | undefined>;
-export type RequestConfig<B = null> = Omit<RequestInit, "body"> & {
-    body?: B;
-    path?: string;
-    urlParams?: query;
+
+export type RequestConfig<P = undefined> = {
+    method: method;
+    urlPath: string;
+    query?: query;
+    payload?: P;
+    headers?: headers;
+    responseType?: responseType;
 };
 
-export const defaultHeaders = (json: boolean) =>
-    json && { "Content-Type": "application/json" };
+export const contentTypeHeader = <P>(payload: P) => {
+    let value = "application/json; charset=utf-8";
 
-export const requestConfig = <B = null>(
-    config: RequestConfig<B>
-): RequestInit => {
-    const json = !(config.body instanceof FormData);
+    if (typeof payload === "string" || payload instanceof String)
+        value = "text/plain; charset=utf-8";
 
-    const options = {
-        ...config,
+    if (payload instanceof FormData) {
+        const files = [...payload.values()].some((v) => v instanceof File);
+        value = files
+            ? "multipart/form-data"
+            : "application/x-www-form-urlencoded";
+    }
+
+    return { "content-type": value };
+};
+
+export const request = <P>(config: RequestConfig<P>): requestConfig<P> => {
+    const url = `${api}/${config.urlPath}${urlParams(config.query)}`;
+
+    const req: requestConfig<P> = {
+        url: url,
         method: config.method ?? "GET",
-        headers: {
-            ...defaultHeaders(json),
-            ...config?.headers
-        }
-    } as RequestInit;
+        data: config.payload,
+        headers: { ...contentTypeHeader(config.payload), ...config.headers },
+        responseType: config.responseType ?? "json"
+    };
 
-    if (json) options.body = JSON.stringify(config.body);
-
-    return options;
+    return req;
 };
 
 export const urlParams = (query: query | null | undefined) => {
@@ -43,11 +64,18 @@ export const urlParams = (query: query | null | undefined) => {
     return `?${args.join("&")}`;
 };
 
-export const request = <B = null>(
-    config: RequestConfig<B>
-): Promise<Response> => {
-    return fetch(
-        `${api}/${config.path}${urlParams(config.urlParams)}`,
-        requestConfig(config)
-    );
+export const fetch = async <R, P>(
+    config: RequestConfig<P>
+): Promise<response<R, P> | void> => {
+    return axios<R, response<R, P>, P>(request(config))
+        .then((res) => Promise.resolve(res))
+        .catch(err => {
+            errorHandler(err);
+            Promise.reject(err);
+        });
 };
+
+export const errorHandler = <R, P>(err: error<R, P>) => {
+    console.log(err.message);
+}
+
