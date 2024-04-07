@@ -1,0 +1,14 @@
+{
+    "success" : "Request ist erfolgreich",
+    "success-PUT": "Erfolgreich erstellt",
+    "success-POST": "Erfolgreich gespeichert",
+    "success-DELETE": "Erfolgreich entfernt",
+
+    "error": "Es ist ein Fehler aufgetreten.",
+    "timeout": "Zeitüberschreitung überschritten.",
+    "500": "Ein Dienstfehler ist aufgetreten.",
+    "400": "Eine unvollständig definierte Anfrage kann nicht bearbeitet werden.",
+    "401": "Sie sind für diese Anfrage nicht berechtigt.",
+    "404": "Die angeforderten Daten existieren nicht.",
+    "409": "Konflikt: Eintrag ist bereit existiert."
+}
