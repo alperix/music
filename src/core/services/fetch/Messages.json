@@ -1,8 +1,9 @@
 {
     "success" : "Request ist erfolgreich",
-    "success-PUT": "Erfolgreich erstellt",
-    "success-POST": "Erfolgreich gespeichert",
-    "success-DELETE": "Erfolgreich entfernt",
+    "GET": "",
+    "PUT": "Erfolgreich erstellt",
+    "POST": "Erfolgreich gespeichert",
+    "DELETE": "Erfolgreich entfernt",
 
     "error": "Es ist ein Fehler aufgetreten.",
     "timeout": "Zeitüberschreitung überschritten.",
