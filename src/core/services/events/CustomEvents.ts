@@ -23,9 +23,9 @@ export const eventListener: eventEffect =
     };
 
 export const emitEvent = <T>(name: string, data: T): void => {
-    window.dispatchEvent(
-        new CustomEvent(name, { bubbles: false, detail: data })
-    );
+    const event = new CustomEvent(name, { bubbles: false, detail: data });
+    window.dispatchEvent(event);
+    console.log("event:", event);
 };
 
 export const useCatchEvent = <T>(
