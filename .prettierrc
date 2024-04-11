@@ -7,7 +7,7 @@
     "jsxBracketSameLine": false,
     "noSemi": true,
     "rcVerbose": true,
-    "semi": true,
+    "semi": false,
     "bracketSpacing": true,
     "endOfLine": "lf"
 }

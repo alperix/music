@@ -1,5 +1,5 @@
 {
-    "success" : "Request ist erfolgreich",
+    "success": "Request ist erfolgreich",
     "GET": "",
     "PUT": "Erfolgreich erstellt",
     "POST": "Erfolgreich gespeichert",
