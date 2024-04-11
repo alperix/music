@@ -143,9 +143,8 @@ export const urlParams = (query: query | null | undefined) => {
 }
 
 /**
- * The function serves as an adapter for making HTTP requests using Axios. 
  * This function uses axios to make a request based on the provided configuration 
- * and returns a Promise with the response.
+ * and returns a Promise with the response. It serves as an adapter for making HTTP requests using Axios. 
  * Generic types @param {<R, P>} represent the response data type and the request payload type, respectively.
  */
 export const fetch = <R = undefined, P = undefined>(
