@@ -7,8 +7,8 @@
 
 /** 
  * importing specific types from the Axios library 
- * imported types are used to ensure type safety and 
- * alignment with Axios when making HTTP requests and handling responses. 
+ * are used to ensure type safety and alignment with Axios 
+ * when making HTTP requests and handling responses. 
  */
 import axios, {
     AxiosRequestConfig,
@@ -16,7 +16,7 @@ import axios, {
     RawAxiosRequestHeaders,
     AxiosResponse,
     AxiosError
-    // Method
+    //Method
 } from "axios"
 
 /**  
@@ -41,7 +41,7 @@ export type headers = RawAxiosRequestHeaders
 
 /**
  * defines a subset of HTTP methods that are implemented and used within the codebase.
- * These methods are a subset of the Axios type `Method` currently.
+ * Subset of the Axios type @param {Method} currently.
  */
 export type methods = "GET" | "PUT" | "DELETE" | "POST"
 
