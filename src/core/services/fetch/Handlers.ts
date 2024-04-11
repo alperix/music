@@ -72,28 +72,31 @@ export const useFetchHandlers = <R = undefined, P = undefined>() => {
     const navigate = useRouter()
 
     const success = useRef((config: apiConfig<R, P>, res: response<R, P>) => {
-        let message = ""
+        const cfs = config.success
 
-        if (config.method) message = messages[config.method as messageKey]
-        if (config.success?.message) message = config.success.message
+        if (!cfs) return
 
-        successSnack(message)
+        successSnack(
+            cfs.message
+                ? cfs.message
+                : messages[config.method as messageKey] ?? ""
+        )
 
-        config.success?.callback && config.success.callback(res.data)
-        config.success?.event && emitEvent(config.success.event, res.data)
-        config.success?.navigate && navigate(config.success.navigate)
+        cfs.callback && cfs.callback(res.data)
+        cfs.event && emitEvent(cfs.event, res.data)
+        cfs.navigate && navigate(cfs.navigate)
     })
 
     const error = useRef((config: apiConfig<R, P>, err: error<R, P>) => {
-        let message = errorMessage(err)
+        const cfe = config.error
 
-        if (config.error?.message) message = config.error.message
+        if (!cfe) return
 
-        errorSnack(message)
+        errorSnack(cfe.message ? cfe.message : errorMessage(err))
 
-        config.error?.callback && config.error.callback(err)
-        config.error?.event && emitEvent(config.error.event, err)
-        config.error?.navigate && navigate(config.error.navigate)
+        cfe.callback && cfe.callback(err)
+        cfe.event && emitEvent(cfe.event, err)
+        cfe.navigate && navigate(cfe.navigate)
     })
 
     return { success: success.current, error: error.current }
