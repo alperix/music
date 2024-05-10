@@ -77,7 +77,27 @@ export const useBlob = <P = undefined>(): ((
     const post = useApi<File, P>()
 
     const fetcher = useRef(async (c: apiConfig<File, P>) =>
-        post({ ...c, method: c.method || "POST", responseType: "blob" }).catch(
+        post({ 
+            ...c, method: c.method || "POST", 
+            responseType: "blob"
+        }).catch(
+            console.log
+        )
+    )
+
+    return fetcher.current
+}
+
+export const useBytes = <P = undefined>(): ((
+    c: apiConfig<ArrayBuffer, P>
+) => Promise<ArrayBuffer | void>) => {
+    const post = useApi<ArrayBuffer, P>()
+
+    const fetcher = useRef(async (c: apiConfig<ArrayBuffer, P>) =>
+        post({ 
+            ...c, method: c.method || "POST", 
+            responseType: "arraybuffer"
+        }).catch(
             console.log
         )
     )

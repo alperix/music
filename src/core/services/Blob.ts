@@ -2,8 +2,7 @@ import mimeLookup from "mime"
 import { saveAs } from "file-saver"
 
 export type AllowedFileTypes = ArrayBuffer | Blob | File | string
-export type StringTypes = "dataurl" | "base64"
-export type FileType = "bytes" | "blob" | "file" | StringTypes | "invalid"
+export type FileType = "bytes" | "blob" | "file" | "dataurl" | "base64" | "invalid"
 
 export const RxBase64 =
     /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/
