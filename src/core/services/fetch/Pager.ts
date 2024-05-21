@@ -1,31 +1,49 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react"
 
-import { fetch, fetchConfig, query } from "./Fetch";
-import { pageSize } from "../Configuration";
+import { fetch, fetchConfig, query } from "./Fetch"
+import { pageSize } from "../Configuration"
 
-export type order = "asc" | "desc";
+export type order = "asc" | "desc"
+export type Dto = { id: number | string }
 
-export type Page<R> = {
-    content: R[];
-    totalPages: number;
-    totalElements: number;
-    size: number;
-    number: number;
-    numberOfElements: number;
-    first: boolean;
-    last: boolean;
-    empty: boolean;
-};
+export type Page<R extends Dto> = {
+    content: R[]
+    totalPages: number
+    totalElements: number
+    size: number
+    number: number
+    numberOfElements: number
+    first: boolean
+    last: boolean
+    empty: boolean
+}
 
 export type PagerArgs = {
-    page?: number;
-    size?: number;
-    order?: order;
-    orderBy?: string;
-    search?: string;
-    args?: query;
-    disabled?: boolean;
-};
+    page?: number
+    size?: number
+    order?: order
+    orderBy?: string
+    search?: string
+    args?: query
+    disabled?: boolean
+}
+
+export type PageSetter = {
+    page: (page: number) => void
+    size: (size: number) => void
+    search: (search: string) => void
+    args: (args: query) => void
+    sort: (orderBy: string, order?: order) => void
+}
+
+export type Pager<T extends Dto> = {
+    data: Page<T>
+    query: PagerArgs
+    setters: PageSetter
+    loading: boolean
+    error: boolean
+    refresh: () => void
+}
 
 export const defaultPage = {
     content: [],
@@ -37,9 +55,9 @@ export const defaultPage = {
     size: 0,
     totalElements: 0,
     totalPages: 0
-};
+}
 
-export const usePager = <R>(url: string, config?: PagerArgs) => {
+export const usePager = <R extends Dto>(url: string, config?: PagerArgs) => {
     const transform = useRef((q: PagerArgs): fetchConfig => {
         return {
             urlPath: url,
@@ -51,8 +69,8 @@ export const usePager = <R>(url: string, config?: PagerArgs) => {
                 search: q.search,
                 ...q.args
             }
-        };
-    });
+        }
+    })
 
     const [query, setQuery] = useState<PagerArgs>({
         page: config?.page ?? 0,
@@ -61,53 +79,53 @@ export const usePager = <R>(url: string, config?: PagerArgs) => {
         orderBy: config?.orderBy ?? "createdAt",
         search: config?.search ?? "",
         args: config?.args ?? {}
-    });
+    })
 
     const [request, setRequest] = useState<fetchConfig>(
         transform.current(query)
-    );
+    )
 
-    const [data, setData] = useState<Page<R>>(defaultPage);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [data, setData] = useState<Page<R>>(defaultPage)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const refresh = useCallback(() => {
-        setLoading(true);
+        setLoading(true)
         fetch<Page<R>>(request)
             .then((res) => {
-                setData(res?.data);
-                setError(false);
+                setData(res?.data)
+                setError(false)
             })
             .catch((err) => {
-                setError(true);
-                console.log(err.message);
+                setError(true)
+                console.log(err.message)
             })
-            .finally(() => setLoading(false));
-    }, [request]);
+            .finally(() => setLoading(false))
+    }, [request])
 
-    const setters = {
+    const setters: PageSetter = {
         page: (page: number) => setQuery({ ...query, page }),
         size: (size: number) => setQuery({ ...query, size, page: 0 }),
         search: (search: string) => setQuery({ ...query, search }),
         args: (args: query) => setQuery({ ...query, ...args }),
 
         sort: (orderBy: string, order?: order) => {
-            let orb = query.orderBy;
-            let ord = query.order;
+            let orb = query.orderBy
+            let ord = query.order
 
             if (orb === orderBy) {
-                ord = order ? order : ord === "asc" ? "desc" : "asc";
+                ord = order ? order : ord === "asc" ? "desc" : "asc"
             } else {
-                orb = orderBy;
-                ord = order ? order : "desc";
+                orb = orderBy
+                ord = order ? order : "desc"
             }
 
-            setQuery({ ...query, order: ord, orderBy: orb });
+            setQuery({ ...query, order: ord, orderBy: orb })
         }
-    };
+    }
 
-    useEffect(() => setRequest(transform.current(query)), [query]);
-    useEffect(refresh, [refresh]);
+    useEffect(() => setRequest(transform.current(query)), [query])
+    useEffect(refresh, [refresh])
 
     return {
         data,
@@ -116,5 +134,5 @@ export const usePager = <R>(url: string, config?: PagerArgs) => {
         loading,
         error,
         refresh
-    };
-};
+    }
+}
