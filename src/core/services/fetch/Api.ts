@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react"
-import { fetch, error, response, fetchConfig } from "./Fetch"
+import { useRef } from "react"
+import { fetch, error, response } from "./Fetch"
 import { apiConfig, useFetchHandlers } from "./Handlers"
 
 export const useApi = <R = undefined, P = undefined>(): ((
@@ -77,63 +77,10 @@ export const useBlob = <P = undefined>(): ((
     const post = useApi<File, P>()
 
     const fetcher = useRef(async (c: apiConfig<File, P>) =>
-        post({ 
-            ...c, method: c.method || "POST", 
-            responseType: "blob"
-        }).catch(
+        post({ ...c, method: c.method || "POST", responseType: "blob" }).catch(
             console.log
         )
     )
 
     return fetcher.current
-}
-
-export const useBytes = <P = undefined>(): ((
-    c: apiConfig<ArrayBuffer, P>
-) => Promise<ArrayBuffer | void>) => {
-    const post = useApi<ArrayBuffer, P>()
-
-    const fetcher = useRef(async (c: apiConfig<ArrayBuffer, P>) =>
-        post({ 
-            ...c, method: c.method || "POST", 
-            responseType: "arraybuffer"
-        }).catch(
-            console.log
-        )
-    )
-
-    return fetcher.current
-}
-
-export const useFetcher = <R, P = undefined>(config: fetchConfig<P>) => {
-    const cref = useRef(config)
-
-    const [data, setData] = useState<R>()
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
-
-    const refresh = () => {
-        if (!cref.current.urlPath) return
-
-        setLoading(true)
-        fetch<R, P>(cref.current)
-            .then((res) => {
-                setData(res?.data)
-                setError(false)
-            })
-            .catch((err) => {
-                setError(true)
-                console.log(err.message)
-            })
-            .finally(() => setLoading(false))
-    }
-
-    useEffect(refresh, [])
-
-    return {
-        data,
-        loading,
-        error,
-        refresh
-    }
 }

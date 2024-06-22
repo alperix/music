@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import { fetch, fetchConfig, query } from "./Fetch"
 import { pageSize } from "../Configuration"
@@ -57,6 +57,39 @@ export const defaultPage = {
     totalPages: 0
 }
 
+export const useFetcher = <R, P = undefined>(config: fetchConfig<P>) => {
+    const cref = useRef(config)
+
+    const [data, setData] = useState<R>()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+
+    const refresh = () => {
+        if (!cref.current.urlPath) return
+
+        setLoading(true)
+        fetch<R, P>(cref.current)
+            .then((res) => {
+                setData(res?.data)
+                setError(false)
+            })
+            .catch((err) => {
+                setError(true)
+                console.log(err.message)
+            })
+            .finally(() => setLoading(false))
+    }
+
+    useEffect(refresh, [])
+
+    return {
+        data,
+        loading,
+        error,
+        refresh
+    }
+}
+
 export const usePager = <R extends Dto>(url: string, config?: PagerArgs) => {
     const transform = useRef((q: PagerArgs): fetchConfig => {
         return {
@@ -81,15 +114,12 @@ export const usePager = <R extends Dto>(url: string, config?: PagerArgs) => {
         args: config?.args ?? {}
     })
 
-    const [request, setRequest] = useState<fetchConfig>(
-        transform.current(query)
-    )
-
     const [data, setData] = useState<Page<R>>(defaultPage)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
     const refresh = useCallback(() => {
+        const request = transform.current(query)
         setLoading(true)
         fetch<Page<R>>(request)
             .then((res) => {
@@ -101,38 +131,41 @@ export const usePager = <R extends Dto>(url: string, config?: PagerArgs) => {
                 console.log(err.message)
             })
             .finally(() => setLoading(false))
-    }, [request])
+    }, [query])
 
-    const setters: PageSetter = {
-        page: (page: number) => setQuery({ ...query, page }),
-        size: (size: number) => setQuery({ ...query, size, page: 0 }),
-        search: (search: string) => setQuery({ ...query, search }),
-        args: (args: query) => setQuery({ ...query, ...args }),
+    const setters: PageSetter = useMemo(
+        () => ({
+            page: (page: number) => setQuery((q) => ({ ...q, page })),
+            size: (size: number) => setQuery((q) => ({ ...q, page: 0, size })),
+            search: (search: string) => setQuery((q) => ({ ...q, search })),
+            args: (args: query) => setQuery((q) => ({ ...q, args })),
 
-        sort: (orderBy: string, order?: order) => {
-            let orb = query.orderBy
-            let ord = query.order
+            sort: (orderBy: string, order?: order) =>
+                setQuery((q) => {
+                    let orb = q.orderBy
+                    let ord = q.order
 
-            if (orb === orderBy) {
-                ord = order ? order : ord === "asc" ? "desc" : "asc"
-            } else {
-                orb = orderBy
-                ord = order ? order : "desc"
-            }
+                    if (orb === orderBy) {
+                        ord = order ? order : ord === "asc" ? "desc" : "asc"
+                    } else {
+                        orb = orderBy
+                        ord = order ? order : "desc"
+                    }
 
-            setQuery({ ...query, order: ord, orderBy: orb })
-        }
-    }
+                    return { ...q, order: ord, orderBy: orb }
+                })
+        }),
+        []
+    )
 
-    useEffect(() => setRequest(transform.current(query)), [query])
     useEffect(refresh, [refresh])
 
     return {
         data,
         query,
-        setters,
         loading,
         error,
-        refresh
+        refresh,
+        setters
     }
 }

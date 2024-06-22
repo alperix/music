@@ -1,14 +1,14 @@
 /**
  * Axios Adapter for fetching
- * the code that follows is related to creating an adapter for fetching data using the Axios library. 
- * This section likely contains functions, types, and configurations specific to 
- * making HTTP requests and handling responses using Axios within a TypeScript environment. 
-*/
+ * the code that follows is related to creating an adapter for fetching data using the Axios library.
+ * This section likely contains functions, types, and configurations specific to
+ * making HTTP requests and handling responses using Axios within a TypeScript environment.
+ */
 
-/** 
- * importing specific types from the Axios library 
- * are used to ensure type safety and alignment with Axios 
- * when making HTTP requests and handling responses. 
+/**
+ * importing specific types from the Axios library
+ * are used to ensure type safety and alignment with Axios
+ * when making HTTP requests and handling responses.
  */
 import axios, {
     AxiosRequestConfig,
@@ -19,11 +19,11 @@ import axios, {
     //Method
 } from "axios"
 
-/**  
- * importing dependencies related to configuration settings. 
- * likely used within the Axios adapter for setting up base URLs, timeouts, 
- * or other settings necessary for making HTTP requests. 
-*/
+/**
+ * importing dependencies related to configuration settings.
+ * likely used within the Axios adapter for setting up base URLs, timeouts,
+ * or other settings necessary for making HTTP requests.
+ */
 import { api, timeout } from "../Configuration"
 
 /**
@@ -74,17 +74,17 @@ export type fetchConfig<P = undefined> = {
     headers?: headers
 }
 
-/** includes additional properties specific to the fetching needs 
- * of the application beyond what is provided by Axios. 
+/** includes additional properties specific to the fetching needs
+ * of the application beyond what is provided by Axios.
  */
 export type requestConfig<P = undefined> = {
     responseType?: responseType
 } & fetchConfig<P>
 
 /**
- * The function `contentTypeHeader` determines the content type header 
+ * The function `contentTypeHeader` determines the content type header
  * based on the type of payload provided.
- * @param {P} payload  
+ * @param {P} payload
  * @returns { "content-type": "value" }
  */
 export const contentTypeHeader = <P>(payload: P) => {
@@ -125,8 +125,8 @@ export const request = <P>(config: requestConfig<P>): AxiosRequestConfig<P> => {
 
 /**
  * takes a query object and returns a URL query string based on its key-value pairs.
- * @param {query} query - an object containing key-value pairs 
- * @returns URL query string 
+ * @param {query} query - an object containing key-value pairs
+ * @returns URL query string
  */
 export const urlParams = (query: query | null | undefined) => {
     if (!query || !Object.keys(query).length) return ""
@@ -143,8 +143,8 @@ export const urlParams = (query: query | null | undefined) => {
 }
 
 /**
- * This function uses axios to make a request based on the provided configuration 
- * and returns a Promise with the response. It serves as an adapter for making HTTP requests using Axios. 
+ * This function uses axios to make a request based on the provided configuration
+ * and returns a Promise with the response. It serves as an adapter for making HTTP requests using Axios.
  * Generic types @param {<R, P>} represent the response data type and the request payload type, respectively.
  */
 export const fetch = <R = undefined, P = undefined>(

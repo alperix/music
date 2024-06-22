@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import { emitEvent } from "../events/CustomEvents"
 import { requestConfig, error, response } from "./Fetch"
+
 import messages from "./Messages.json"
 
 export type messageKey = keyof typeof messages
@@ -74,13 +75,13 @@ export const useFetchHandlers = <R = undefined, P = undefined>() => {
     const success = useRef((config: apiConfig<R, P>, res: response<R, P>) => {
         const cfs = config.success
 
-        if (!cfs) return
-
         successSnack(
-            cfs.message
+            cfs?.message
                 ? cfs.message
                 : messages[config.method as messageKey] ?? ""
         )
+
+        if (!cfs) return
 
         cfs.callback && cfs.callback(res.data)
         cfs.event && emitEvent(cfs.event, res.data)
@@ -90,9 +91,9 @@ export const useFetchHandlers = <R = undefined, P = undefined>() => {
     const error = useRef((config: apiConfig<R, P>, err: error<R, P>) => {
         const cfe = config.error
 
-        if (!cfe) return
+        errorSnack(cfe?.message ? cfe.message : errorMessage(err))
 
-        errorSnack(cfe.message ? cfe.message : errorMessage(err))
+        if (!cfe) return
 
         cfe.callback && cfe.callback(err)
         cfe.event && emitEvent(cfe.event, err)
