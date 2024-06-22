@@ -17,6 +17,7 @@
         "axios": "^1.7.2",
         "browser-cookies": "^1.2.0",
         "file-saver": "^2.0.5",
+        "firebase": "^10.12.2",
         "material-icons": "^1.13.12",
         "mime": "^4.0.3",
         "notistack": "^3.0.1",

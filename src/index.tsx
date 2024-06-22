@@ -1,9 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { isDev } from "./core/services/Configuration";
+import { FIREBASE, isDev } from "./core/services/Configuration";
+import { FB } from "./core/services/fetch/Firebase";
 
 import "./index.scss";
-
 import { Root } from "./app/Root";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
@@ -17,3 +17,5 @@ root.render(
         </React.StrictMode>
     )
 );
+
+console.log(FIREBASE.appId, FB?.name)
