@@ -4,7 +4,7 @@ export const timeout = 10; // seconds;
 export const pageSize = 20;
 export const SECRET = "password"
 
-export const FIREBASE = {
+export const fireBaseConfig = {
     apiKey: process.env.FB_API_KEY,
     authDomain: process.env.FB_AUTH_DOMAIN,
     projectId: process.env.FB_PROJECT_ID,
