@@ -12,7 +12,7 @@
     },
     "dependencies": {
         "@types/file-saver": "^2.0.7",
-        "@types/node": "^20.14.7",
+        "@types/node": "^20.14.8",
         "@types/react-dom": "^18.3.0",
         "axios": "^1.7.2",
         "browser-cookies": "^1.2.0",
